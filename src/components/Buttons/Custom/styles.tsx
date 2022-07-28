@@ -3,13 +3,14 @@ import { themeText, themeBg } from '../../../constants/Colors'
 
 export const styles = StyleSheet.create({
     container: {
+        minWidth: '45%',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: themeText,
         borderRadius: 15,
         paddingHorizontal: 20,
         paddingVertical: 7,
-        marginVertical: 5,
+        marginVertical: 7,
         // Shadow
         shadowColor: themeText,
         shadowOffset: {

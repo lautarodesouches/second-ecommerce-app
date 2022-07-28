@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { HomeScreen } from '../../screens'
+import { CartScreen, CheckoutScreen, HomeScreen } from '../../screens'
 
 const MainNavigator = () => {
 
@@ -10,6 +10,14 @@ const MainNavigator = () => {
             <Stack.Screen
                 name='Home'
                 component={HomeScreen}
+            />
+            <Stack.Screen
+                name='Cart'
+                component={CartScreen}
+            />
+            <Stack.Screen
+                name='Checkout'
+                component={CheckoutScreen}
             />
         </Stack.Navigator>
     )

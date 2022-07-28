@@ -1,12 +1,17 @@
-import { Text, View } from 'react-native'
-import { PrimaryButton, SecondaryButton } from '../../components'
+import { FlatList, View } from 'react-native'
+import { ProductPreview } from '../../components'
+import { products } from '../../utils/products'
 import { styles } from './styles'
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: { navigation: any }) => {
     return (
         <View style={styles.container}>
-            <Text>HomeScreen</Text>
-            <PrimaryButton title='Cart' onPress={() => console.log('Test')} />
+            <FlatList
+                data={products}
+                renderItem={({item}) => <ProductPreview item={item} onPress={() => console.log(item.id)} />}
+                numColumns={2}
+                style={styles.flatList}
+            />
         </View>
     )
 }
