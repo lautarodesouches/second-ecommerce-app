@@ -1,5 +1,6 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { PRODUCT_IMAGE_URL } from '../../constants/Urls'
+import PriceInfo from '../PriceInfo'
 import { styles } from './styles'
 
 const ProductPreview = ({ item, onPress }: { item: any, onPress: any }) => {
@@ -14,22 +15,11 @@ const ProductPreview = ({ item, onPress }: { item: any, onPress: any }) => {
             </View>
             <View style={styles.info}>
                 <Text style={styles.title}>{name}</Text>
-                {
-                    !!discount && <Text style={styles.oldPrice}>${price}</Text>
-                }
-                <View style={styles.currentPriceContainer}>
-                    <Text style={styles.currentPrice}>
-                        ${discount ? (Math.round(price - price * discount / 100)) : price}
-                    </Text>
-                    {
-                        !!discount && <Text style={styles.discount}>{discount}%</Text>
-                    }
-                </View>
-                {
-                    freeShipping && (
-                        <Text style={styles.freeShipping}>Envio Gratis!</Text>
-                    )
-                }
+                <PriceInfo
+                    discount={discount}
+                    freeShipping={freeShipping}
+                    price={price}
+                />
             </View>
         </TouchableOpacity>
     )

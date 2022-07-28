@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { CartScreen, CheckoutScreen, HomeScreen } from '../../screens'
+import { CartScreen, CheckoutScreen, HomeScreen, ProductDetailScreen } from '../../screens'
 
 const MainNavigator = () => {
 
@@ -18,6 +18,10 @@ const MainNavigator = () => {
             <Stack.Screen
                 name='Checkout'
                 component={CheckoutScreen}
+            />
+            <Stack.Screen
+                name='Detail'
+                component={ProductDetailScreen}
             />
         </Stack.Navigator>
     )

@@ -24,31 +24,5 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
         marginBottom: 10
-    },
-    oldPrice: {
-        textAlign: 'center',
-        fontSize: 18,
-        marginBottom: 5,
-        color: grey
-    },
-    currentPriceContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'flex-end'
-    },
-    currentPrice: {
-        textAlign: 'center',
-        fontSize: 20
-    },
-    discount: {
-        marginLeft: 5,
-        color: green,
-        fontSize: 16
-    },
-    freeShipping: {
-        textAlign: 'center',
-        fontSize: 20,
-        color: green,
-        marginTop: 7
     }
 })
