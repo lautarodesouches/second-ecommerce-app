@@ -12,7 +12,7 @@ const PriceInfo = ({ discount, price, freeShipping }: { discount: number, price:
                     ${discount ? (Math.round(price - price * discount / 100)) : price}
                 </Text>
                 {
-                    !!discount && <Text style={styles.discount}>{discount}%</Text>
+                    !!discount && <Text style={styles.discount}>{discount}% OFF</Text>
                 }
             </View>
             {

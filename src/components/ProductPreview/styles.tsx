@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { green, grey, themeBg } from '../../constants/Colors';
+import { themeBg } from '../../constants/Colors'
 
 export const styles = StyleSheet.create({
     container: {
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 18,
         marginBottom: 10
     }
 })

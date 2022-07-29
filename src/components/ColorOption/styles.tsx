@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         flex: 1,
         marginHorizontal: 10,
-        paddingVertical: 5,
+        paddingVertical: 7,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

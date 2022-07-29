@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         marginBottom: 5,
-        color: grey
+        color: grey,
+        textDecorationLine: 'line-through'
     },
     currentPriceContainer: {
         flexDirection: 'row',
@@ -15,16 +16,17 @@ export const styles = StyleSheet.create({
     },
     currentPrice: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 24
     },
     discount: {
         marginLeft: 5,
         color: green,
-        fontSize: 16
+        fontSize: 18,
+        marginBottom: 2
     },
     freeShipping: {
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 18,
         color: green,
         marginTop: 7
     }

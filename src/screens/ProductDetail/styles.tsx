@@ -3,6 +3,9 @@ import { themeBg, grey } from '../../constants/Colors/index'
 
 export const styles = StyleSheet.create({
     container: {
+        flex: 1
+    },
+    scroll: {
         flex: 1,
         backgroundColor: themeBg,
         padding: 10,
@@ -12,7 +15,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 10,
         borderRadius: 5,
-        paddingBottom: 150
+        paddingVertical: 25
     },
     nav: {
         flexDirection: 'row'
@@ -66,7 +69,7 @@ export const styles = StyleSheet.create({
         fontSize: 18
     },
     stars: {
-        width: '80%',
+        width: '50%',
         alignSelf: 'center',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
@@ -82,5 +85,10 @@ export const styles = StyleSheet.create({
     colorsOptionsContainer: {
         marginTop: 20,
         flexDirection: 'row',
+    },
+    buttonsContainer: {
+        marginTop: 20,
+        width: '80%',
+        alignSelf: 'center'
     }
 })

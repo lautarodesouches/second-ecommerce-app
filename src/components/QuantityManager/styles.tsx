@@ -25,7 +25,8 @@ export const styles = StyleSheet.create({
         width: '50%',
         borderColor: grey,
         borderWidth: 1,
-        position: 'relative',
+        top: 70,
+        position: 'absolute',
         marginTop: 10,
         zIndex: 99,
         shadowColor: "#000",
@@ -41,7 +42,7 @@ export const styles = StyleSheet.create({
     optionContainer: {
         paddingVertical: 5,
         borderColor: '#e1e1e1',
-        borderBottomWidth: 1,
+        borderBottomWidth: 1
     },
     optionText: {
         fontSize: 18,

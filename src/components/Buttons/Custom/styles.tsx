@@ -7,10 +7,10 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: themeText,
-        borderRadius: 15,
+        borderRadius: 5,
         paddingHorizontal: 20,
-        paddingVertical: 7,
-        marginVertical: 7,
+        paddingVertical: 8,
+        marginVertical: 10,
         // Shadow
         shadowColor: themeText,
         shadowOffset: {
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         },
         shadowOpacity: 0.16,
         shadowRadius: 3.68,
-        elevation: 6
+        elevation: 11
     },
     text: {
         color: themeBg,
