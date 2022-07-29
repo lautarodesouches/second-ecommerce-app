@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import { ColorOption, Notification, PriceInfo, PrimaryButton, SecondaryButton, Thumnail } from '../../components'
+import { ColorOption, Notification, PriceInfo, ButtonPrimary, ButtonSecondary, Thumnail, QuantityManager } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/Urls'
 import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import QuantityManager from '../../components/QuantityManager';
 
 const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: any, item: any }) => {
 
-    const { item } = route.params;
+    const { item } = route.params
 
     const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description } = item
 
@@ -22,7 +21,18 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
     }
 
     const handleBuyNow = () => {
-        navigation.navigate('Cart')
+        navigation.navigate(
+            'Cart',
+            {
+                item: {
+                    id,
+                    name,
+                    price,
+                    quantity,
+                    selectedColor
+                }
+            }
+        )
     }
 
     return (
@@ -85,8 +95,8 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                         </View>
                     </View>
                     <View style={styles.buttonsContainer}>
-                        <SecondaryButton onPress={handleAddToCart} title='Agregar al carrito' />
-                        <PrimaryButton onPress={handleBuyNow} title='Comprar ahora' />
+                        <ButtonSecondary onPress={handleAddToCart} title='Agregar al carrito' />
+                        <ButtonPrimary onPress={handleBuyNow} title='Comprar ahora' />
                     </View>
                 </View>
             </ScrollView>
