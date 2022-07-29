@@ -1,7 +1,7 @@
 import CustomButton from '../Custom'
 import { styles } from './styles'
 
-const PrimaryButton = ({ title, onPress }: { title: string, onPress: any }) => {
+const PrimaryButton = ({ title, onPress }: { title: string, onPress: VoidFunction }) => {
     return (
         <CustomButton
             title={title}

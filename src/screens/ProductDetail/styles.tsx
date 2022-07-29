@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { themeBg, grey } from '../../constants/Colors/index';
+import { themeBg, grey } from '../../constants/Colors/index'
 
 export const styles = StyleSheet.create({
     container: {
@@ -72,47 +72,15 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         marginTop: 20
     },
-    quantityContainer: {
-        marginVertical: 30,
+    colorsContainer: {
+        marginVertical: 10
     },
-    quantityTouchable: {
+    colorsTitle: {
+        fontSize: 18,
+        textAlign: 'center'
+    },
+    colorsOptionsContainer: {
+        marginTop: 20,
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'flex-end'
-    },
-    actualQuantity: {
-        textAlign: 'center',
-        fontSize: 18,
-        marginRight: 5
-    },
-    amountAvailable: {
-        marginTop: 10,
-        textAlign: 'center',
-        fontSize: 17
-    },
-    selectQuantity: {
-        alignSelf: 'center',
-        width: '50%',
-        borderRadius: 5,
-        borderWidth: 1,
-        position: 'relative',
-        marginTop: 10,
-        zIndex: 99
-    },
-    optionContainer: {
-        paddingVertical: 5,
-        borderColor: '#e1e1e1',
-        borderWidth: 1,
-        backgroundColor: '#fff',
-    },
-    optionText: {
-        fontSize: 18,
-        textAlign: 'center'
-    },
-    inputWarn: {
-        marginTop: 15,
-        color: 'crimson',
-        fontSize: 15,
-        textAlign: 'center'
     }
 })

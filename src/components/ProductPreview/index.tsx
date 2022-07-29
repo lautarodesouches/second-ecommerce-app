@@ -3,7 +3,7 @@ import { PRODUCT_IMAGE_URL } from '../../constants/Urls'
 import PriceInfo from '../PriceInfo'
 import { styles } from './styles'
 
-const ProductPreview = ({ item, onPress }: { item: any, onPress: any }) => {
+const ProductPreview = ({ item, onPress }: { item: any, onPress: VoidFunction }) => {
 
     const { id, name, price, discount, freeShipping } = item
 
