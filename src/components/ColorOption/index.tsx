@@ -4,7 +4,7 @@ import { capitalize } from '../../utils/functions'
 import { styles } from './styles'
 
 const ColorOption = ({ color, selectedColor, setSelectedColor }: { color: string, selectedColor: string, setSelectedColor: Function }) => {
-    let isColorSelected = selectedColor === color
+    let isColorSelected: boolean = selectedColor === color
     return (
         <TouchableOpacity
             key={color}

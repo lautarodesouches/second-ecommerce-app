@@ -1,5 +1,5 @@
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
-import { ButtonDanger, ButtonPrimary, ButtonSecondary } from '../../components'
+import { ButtonDanger, ButtonPrimary } from '../../components'
 import ButtonMuted from '../../components/Buttons/Muted'
 import { PRODUCT_IMAGE_URL } from '../../constants/Urls'
 import { products } from '../../utils/products'
@@ -7,7 +7,7 @@ import { styles } from './styles'
 
 const CartScreen = ({ navigation }: { navigation: any }) => {
 
-    const cart = [
+    const cart: any[] = [
         products[0],
         products[10],
         products[19]
@@ -21,7 +21,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
     )
 
     const renderItem = ({ item, index }: { item: any, index: number }) => {
-        let quantity = Math.round(Math.random() * 20 + 1)
+        let quantity: number = Math.round(Math.random() * 20 + 1)
         return (
             <View key={index} style={styles.itemContainer}>
                 <TouchableOpacity style={styles.deleteTouchable} onPress={() => console.log(item.id)}>
@@ -38,18 +38,33 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
         )
     }
 
-    const ListHeaderComponent = () => (
-        <View style={styles.buttonContainer}>
-            <ButtonMuted onPress={() => navigation.navigate('Home')} title='Seguir comprando' />
-            <ButtonDanger onPress={() => console.log('delete')} title='Eliminar todos' />
-        </View>
-    )
-
-    const ListFooterComponent = () => (
-        <>
-            <Text style={styles.total}>Total: $123</Text>
+    const ListHeaderComponent = () => {
+        if (!cart.length) return null
+        return (
             <View style={styles.buttonContainer}>
-                <ButtonPrimary onPress={() => navigation.navigate('Checkout')} title='Checkout' />
+                <ButtonMuted onPress={() => navigation.navigate('Home')} title='Seguir comprando' />
+                <ButtonDanger onPress={() => console.log('delete')} title='Eliminar todos' />
+            </View>
+        )
+    }
+
+    const ListFooterComponent = () => {
+        if (!cart.length) return null
+        return (
+            <>
+                <Text style={styles.total}>Total: $123</Text>
+                <View style={styles.buttonContainer}>
+                    <ButtonPrimary onPress={() => navigation.navigate('Checkout')} title='Checkout' />
+                </View>
+            </>
+        )
+    }
+
+    const ListEmptyComponent = () => (
+        <>
+            <Text style={styles.emptyText}>El carrito se encuentra vacío</Text>
+            <View style={styles.buttonContainer}>
+                <ButtonPrimary onPress={() => navigation.navigate('Home')} title='Volver al inicio' />
             </View>
         </>
     )
@@ -62,6 +77,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
                 renderItem={renderItem}
                 ListHeaderComponent={ListHeaderComponent}
                 ListFooterComponent={ListFooterComponent}
+                ListEmptyComponent={ListEmptyComponent}
             />
         </View>
     )

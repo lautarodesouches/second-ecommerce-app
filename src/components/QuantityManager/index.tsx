@@ -16,7 +16,7 @@ const QuantityManager = ({ amountAvailable, quantity, setQuantity }: { amountAva
     const handleQuantitySelected = (number: number) => {
         setTargetOpacity(targetOpacity ? 0 : 1)
         if (!number || number < 0) return
-        let lessThanAmountAvailable = amountAvailable < number
+        let lessThanAmountAvailable: boolean = amountAvailable < number
         setAmountAvailableWarn(lessThanAmountAvailable)
         setQuantity(lessThanAmountAvailable ? amountAvailable : number)
     }

@@ -7,7 +7,9 @@ export const styles = StyleSheet.create({
         backgroundColor: themeBg,
     },
     contentContainer: {
-        paddingHorizontal: '5%'
+        paddingHorizontal: '5%',
+        flexGrow: 1,
+        justifyContent: 'center'
     },
     itemContainer: {
         borderColor: grey,
@@ -61,5 +63,9 @@ export const styles = StyleSheet.create({
     },
     deleteText: {
         color: '#fff'
+    },
+    emptyText: {
+        fontSize: 20,
+        textAlign: 'center'
     }
 })
