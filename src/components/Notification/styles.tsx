@@ -20,6 +20,6 @@ export const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         color: secondaryText,
-        fontSize: 16
+        fontSize: 17
     }
 })

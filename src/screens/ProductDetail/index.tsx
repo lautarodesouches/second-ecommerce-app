@@ -38,7 +38,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
     return (
         <View style={styles.container}>
             {
-                showNotification && <Notification message='Producto agregardo' onPress={() => setShowNotification(false)} />
+                showNotification && <Notification message='Producto agregado al carrito' onPress={() => setShowNotification(false)} />
             }
             <ScrollView style={styles.scroll}>
                 <View style={styles.productContainer}>

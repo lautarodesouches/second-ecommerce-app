@@ -1,9 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { CartScreen, CheckoutScreen, HomeScreen, ProductDetailScreen } from '../../screens'
+import { CartScreen, CheckoutScreen, HomeScreen, AuthScreen, ProductDetailScreen } from '../../screens'
 
 const MainNavigator = () => {
 
     const Stack = createNativeStackNavigator()
+
+    const userId = null
 
     return (
         <Stack.Navigator>
@@ -12,16 +14,20 @@ const MainNavigator = () => {
                 component={HomeScreen}
             />
             <Stack.Screen
+                name='Detail'
+                component={ProductDetailScreen}
+            />
+            <Stack.Screen
                 name='Cart'
                 component={CartScreen}
             />
             <Stack.Screen
-                name='Checkout'
-                component={CheckoutScreen}
+                name='Auth'
+                component={AuthScreen}
             />
             <Stack.Screen
-                name='Detail'
-                component={ProductDetailScreen}
+                name='Checkout'
+                component={userId ? CheckoutScreen : AuthScreen}
             />
         </Stack.Navigator>
     )
