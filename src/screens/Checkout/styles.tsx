@@ -3,9 +3,14 @@ import { themeBg } from '../../constants/Colors/index'
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: themeBg
+        flexGrow: 1,
+        backgroundColor: themeBg,
+        padding: '5%',
+        justifyContent: 'space-between'
+    },
+    form: {
+        padding: '5%',
+        borderRadius: 5,
+        backgroundColor: '#fff'
     }
 })

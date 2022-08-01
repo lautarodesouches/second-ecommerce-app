@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
         marginBottom: 10
     },
     input: {
+        backgroundColor: '#fff',
         fontSize: 16,
         borderRadius: 5,
         borderColor: '#000',

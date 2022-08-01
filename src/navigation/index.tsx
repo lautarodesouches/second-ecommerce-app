@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native'
-import { StatusBar } from 'react-native'
+import { StatusBar, Text } from 'react-native'
 import MainNavigator from './Main'
 
 const AppNavigation = () => {

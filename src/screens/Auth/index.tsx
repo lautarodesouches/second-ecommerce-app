@@ -35,7 +35,6 @@ const AuthScreen = () => {
         return true
     }
 
-
     const validateForm = () => {
         setForm({ ...form, ['isFormValid']: false })
         if (isEmailOk() && isPasswordOk()) {
@@ -46,7 +45,7 @@ const AuthScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.form}>
-                <Text style={styles.title}>Title</Text>
+                <Text style={styles.title}>Ingresar</Text>
                 <CustomInput
                     label='Email'
                     helpMessage={form.email.error}
@@ -56,19 +55,16 @@ const AuthScreen = () => {
                     onEndEditing={isEmailOk}
                 />
                 <CustomInput
-                    label='Password'
+                    label='Contraseña'
                     helpMessage={form.password.error}
                     keyboardType='default'
                     value={form.password.value}
                     onChangeText={(value: string) => setForm({ ...form, ['password']: new Input(value, '') })}
                     onEndEditing={isPasswordOk}
                 />
-                <View>
-                    <ButtonPrimary onPress={validateForm} title='Validar' />
+                <View style={styles.buttonContainer}>
+                    <ButtonPrimary onPress={validateForm} title='Ingresar' />
                 </View>
-                {
-                    form.isFormValid && <Text>Form Ok</Text>
-                }
             </View>
         </View>
     )
