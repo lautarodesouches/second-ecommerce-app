@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { primaryBg, themeBg, themeText, secondaryBg } from '../../constants/Colors/index';
+import { primaryBg, themeBg, themeText } from '../../constants/Colors/index'
 
 export const styles = StyleSheet.create({
     container: {
@@ -48,14 +48,25 @@ export const styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        justifyContent: 'flex-end'
+        flexDirection: 'row'
     },
     modalNoFeedback: {
-        height: '50%'
+        flex: 1,
+        backgroundColor: '#00000099'
     },
     modalContent: {
-        height: '50%',
+        justifyContent: 'space-between',
+        flex: 2,
         padding: '5%',
-        backgroundColor: secondaryBg
+        backgroundColor: '#fff'
+    },
+    modalText: {
+        fontSize: 20
+    },
+    modalCloseButton: {
+        alignItems: 'center'
+    },
+    closeButton: {
+        backgroundColor: '#000'
     }
 })

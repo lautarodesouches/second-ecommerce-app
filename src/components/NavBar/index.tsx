@@ -3,12 +3,16 @@ import { styles } from './styles'
 import { Ionicons } from '@expo/vector-icons'
 import { primaryText, themeText } from '../../constants/Colors/index'
 import { useState } from 'react'
+import CustomButton from '../Buttons/Custom'
+import NavModal from '../NavModal'
 
 const NavBar = ({ navigation }: { navigation: any }) => {
 
     const [showModal, setShowModal] = useState(false)
 
     const navigate = (screen: string) => navigation.navigate(screen)
+
+    const closeModal = () => setShowModal(false)
 
     return (
         <>
@@ -45,20 +49,7 @@ const NavBar = ({ navigation }: { navigation: any }) => {
                 </View>
             </View>
             {
-                showModal && (
-                    <Modal
-                        animationType='slide'
-                        transparent={true}
-                        onRequestClose={() => setShowModal(false)}
-                    >
-                        <View style={styles.modalContainer}>
-                            <TouchableOpacity style={styles.modalNoFeedback} onPress={() => setShowModal(false)} />
-                            <View style={styles.modalContent}>
-                                <Text>Test</Text>
-                            </View>
-                        </View>
-                    </Modal>
-                )
+                showModal && <NavModal closeModal={closeModal} navigate={navigate} />
             }
         </>
     )
