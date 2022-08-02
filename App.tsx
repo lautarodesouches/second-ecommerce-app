@@ -1,5 +1,7 @@
 import AppNavigation from './src/navigation'
 import { useFonts } from 'expo-font'
+import { Provider } from 'react-redux'
+import { store } from './src/store'
 
 export default function App() {
 
@@ -21,6 +23,8 @@ export default function App() {
   if (!loaded) return null
 
   return (
-    <AppNavigation />
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
   )
 }

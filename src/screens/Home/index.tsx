@@ -1,9 +1,12 @@
 import { FlatList, View } from 'react-native'
 import { ProductPreview } from '../../components'
-import { products } from '../../utils/products'
 import { styles } from './styles'
+import { useSelector } from 'react-redux'
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
+
+    const products = useSelector((state: any) => state.product.products)
+
     return (
         <View style={styles.container}>
             <FlatList
