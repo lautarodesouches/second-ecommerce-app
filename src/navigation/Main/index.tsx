@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavBar } from '../../components'
 import { CartScreen, CheckoutScreen, HomeScreen, AuthScreen, ProductDetailScreen, ThankyouScreen, OrdersScreen } from '../../screens'
 
 const MainNavigator = () => {
@@ -9,9 +10,10 @@ const MainNavigator = () => {
 
     return (
         <Stack.Navigator
-            initialRouteName='Thankyou'
+            initialRouteName='Home'
             screenOptions={{
-                headerShown: false
+                headerStyle: {backgroundColor: 'red'},
+                header: (props) => <NavBar navigation={props.navigation} />
             }}
         >
             <Stack.Screen
