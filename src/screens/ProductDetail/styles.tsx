@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     scroll: {
         flex: 1,
         backgroundColor: themeBg,
-        padding: 10,
+        padding: 10
     },
     productContainer: {
         flex: 1,
@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     navText: {
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'RobotoRegular'
     },
     imagesContainer: {
         height: 250,
@@ -54,7 +55,8 @@ export const styles = StyleSheet.create({
         fontSize: 22,
         marginTop: 20,
         marginBottom: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'RobotoRegular'
     },
     description: {
         fontSize: 18,

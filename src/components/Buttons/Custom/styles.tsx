@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
     },
     text: {
         color: themeBg,
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: 'RobotoRegular'
     }
 })

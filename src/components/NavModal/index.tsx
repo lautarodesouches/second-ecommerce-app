@@ -27,7 +27,7 @@ const NavModal = ({ closeModal, navigate }: { closeModal: VoidFunction, navigate
                         <NavOption routeName='Orders' title='Ordenes' />
                     </View>
                     <View style={styles.closeButtonContainer}>
-                        <CustomButton onPress={closeModal} title='Cerrar' buttonStyle={styles.closeButton} />
+                        <CustomButton onPress={closeModal} title='Cerrar' textStyle={styles.closeButtonText} buttonStyle={styles.closeButton} />
                     </View>
                 </View>
             </View>

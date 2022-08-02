@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
         marginTop: 15
     },
     title: {
+        fontFamily: 'RobotoRegular',
         textAlign: 'center',
         fontSize: 18,
         marginBottom: 10

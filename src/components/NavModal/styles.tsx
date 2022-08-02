@@ -19,12 +19,17 @@ export const styles = StyleSheet.create({
         marginVertical: 10
     },
     text: {
-        fontSize: 20
+        fontSize: 20,
+        fontFamily: 'MerriweatherRegular'
     },
     closeButtonContainer: {
         alignItems: 'center'
     },
     closeButton: {
         backgroundColor: '#000'
+    },
+    closeButtonText: {
+        fontSize: 16,
+        fontFamily: 'MerriweatherRegular'
     }
 })

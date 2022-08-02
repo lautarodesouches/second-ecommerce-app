@@ -33,17 +33,20 @@ export const styles = StyleSheet.create({
     placeholder: {
         fontSize: 14,
         color: grey,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'RobotoLight'
     },
     value: {
         marginTop: 5,
         fontSize: 22,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'RobotoLight'
     },
     total: {
         marginTop: 20,
         fontSize: 25,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'RobotoLight'
     },
     buttonContainer: {
         marginVertical: 10

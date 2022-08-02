@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
     brand: {
         fontSize: 20,
         color: themeText,
-        alignSelf: 'flex-end'
+        alignSelf: 'flex-end',
+        fontFamily: 'MerriweatherItalic'
     },
     iconsContainer: {
         flexDirection: 'row',
@@ -36,6 +37,7 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         paddingVertical: 5,
         paddingHorizontal: 10,
+        fontFamily: 'MerriweatherRegular'
     },
     searchIcon: {
         backgroundColor: primaryBg,
@@ -45,28 +47,5 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderTopRightRadius: 5,
         borderBottomRightRadius: 5
-    },
-    modalContainer: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    modalNoFeedback: {
-        flex: 1,
-        backgroundColor: '#00000099'
-    },
-    modalContent: {
-        justifyContent: 'space-between',
-        flex: 2,
-        padding: '5%',
-        backgroundColor: '#fff'
-    },
-    modalText: {
-        fontSize: 20
-    },
-    modalCloseButton: {
-        alignItems: 'center'
-    },
-    closeButton: {
-        backgroundColor: '#000'
     }
 })
