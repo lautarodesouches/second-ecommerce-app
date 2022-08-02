@@ -1,24 +1,31 @@
 import { FlatList, View } from 'react-native'
 import { ProductPreview } from '../../components'
 import { styles } from './styles'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import db from '../../utils/firebaseConfig'
-import { collection, getDocs, query } from "firebase/firestore"
+import { collection, getDocs, query } from 'firebase/firestore'
 import { useEffect } from 'react'
+import { setProducts } from '../../store/product.slice'
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
         (async function () {
-            const querySnapshot = query(collection(db, "products"))
-            return await getDocs(querySnapshot);
+            const querySnapshot = query(collection(db, 'products'))
+            return await getDocs(querySnapshot)
         })()
             .then((result) => {
 
-                if (!result.docs) throw new TypeError("Hubo un error por favor intente mas tarde");
+                if (!result.docs) throw new Error('Hubo un error en la carga de los productos')
 
-                console.log(
-                    result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+                if (result.docs.length < 1) throw new Error('No se encontraron productos')
+
+                dispatch(
+                    setProducts(
+                        result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+                    )
                 )
 
             })

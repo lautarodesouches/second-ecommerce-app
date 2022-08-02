@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { products } from '../utils/products'
 
 const productSlice = createSlice({
     name: 'product',
     initialState: {
-        products
+        products: [],
+        cart: []
     },
     reducers: {
-
+        setProducts: (state, action) => {
+            state.products = action.payload
+        }
     }
 })
 
-//export const { incremented, decremented } = productSlice.actions
+export const { setProducts } = productSlice.actions
 
 export default productSlice.reducer
