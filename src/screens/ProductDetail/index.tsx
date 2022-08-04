@@ -4,8 +4,13 @@ import { ColorOption, Notification, PriceInfo, ButtonPrimary, ButtonSecondary, T
 import { PRODUCT_IMAGE_URL } from '../../constants/Urls'
 import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../store/product.slice'
+import { CartItem } from '../../models/CartItem';
 
 const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: any, item: any }) => {
+
+    const dispatch = useDispatch()
 
     const { item } = route.params
 
@@ -21,18 +26,12 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
     }
 
     const handleBuyNow = () => {
-        navigation.navigate(
-            'Cart',
-            {
-                item: {
-                    id,
-                    name,
-                    price,
-                    quantity,
-                    selectedColor
-                }
-            }
+        dispatch(
+            addToCart(
+                new CartItem(id, name, selectedColor, quantity, price)
+            )
         )
+        navigation.navigate('Cart')
     }
 
     return (

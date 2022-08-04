@@ -51,22 +51,6 @@ export const styles = StyleSheet.create({
     buttonContainer: {
         marginVertical: 10
     },
-    deleteTouchable: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        backgroundColor: 'crimson',
-        height: 30,
-        width: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 20,
-        margin: 10,
-        zIndex: 99
-    },
-    deleteText: {
-        color: '#fff'
-    },
     emptyText: {
         fontSize: 20,
         textAlign: 'center'
