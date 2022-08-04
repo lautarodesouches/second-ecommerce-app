@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavBar } from '../../components'
-import { CartScreen, CheckoutScreen, HomeScreen, AuthScreen, ProductDetailScreen, ThankyouScreen, OrdersScreen } from '../../screens'
+import { CartScreen, CheckoutScreen, HomeScreen, AuthScreen, ProductDetailScreen, ThankyouScreen, OrdersScreen, SearchScreen } from '../../screens'
 
 const MainNavigator = () => {
 
@@ -43,6 +43,10 @@ const MainNavigator = () => {
             <Stack.Screen
                 name='Orders'
                 component={OrdersScreen}
+            />
+            <Stack.Screen
+                name='Search'
+                component={SearchScreen}
             />
         </Stack.Navigator>
     )

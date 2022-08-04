@@ -4,14 +4,25 @@ import { Ionicons } from '@expo/vector-icons'
 import { primaryText, themeText } from '../../constants/Colors/index'
 import { useState } from 'react'
 import NavModal from '../NavModal'
+import { useDispatch } from 'react-redux'
+import { setGlobalQuery } from '../../store/search.slice'
 
 const NavBar = ({ navigation }: { navigation: any }) => {
 
+    const dispatch = useDispatch()
+
     const [showModal, setShowModal] = useState(false)
+    const [localQuery, setLocalQuery] = useState('')
 
     const navigate = (screen: string) => navigation.navigate(screen)
 
     const closeModal = () => setShowModal(false)
+
+    const saveAndNavigate = () => {
+        dispatch(setGlobalQuery(localQuery))
+        setLocalQuery('')
+        navigate('Search')
+    }
 
     return (
         <>
@@ -36,13 +47,13 @@ const NavBar = ({ navigation }: { navigation: any }) => {
                 </View>
                 <View style={styles.searchContainer}>
                     <TextInput
-                        onChangeText={(e: string) => { }}
-                        onEndEditing={() => { }}
+                        onChangeText={(e: string) => setLocalQuery(e)}
+                        onEndEditing={saveAndNavigate}
                         placeholder='Buscar'
                         style={styles.searchInput}
-                        value=''
+                        value={localQuery}
                     />
-                    <TouchableOpacity style={styles.searchIcon}>
+                    <TouchableOpacity style={styles.searchIcon} onPress={saveAndNavigate}>
                         <Ionicons name='search' size={20} color={primaryText} />
                     </TouchableOpacity>
                 </View>

@@ -1,19 +1,17 @@
 import { FlatList, Text, View } from 'react-native'
 import { ProductPreview } from '../../components'
 import { styles } from './styles'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import db from '../../utils/firebaseConfig'
 import { collection, getDocs, query } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { setProducts } from '../../store/product.slice'
 
-const HomeScreen = ({ navigation }: { navigation: any }) => {
+const SearchScreen = ({ navigation }: { navigation: any }) => {
 
-    const [emptyMessage, setEmptyMessage] = useState('Cargando...')
+    const [emptyMessage, setEmptyMessage] = useState<string>('Cargando...')
+    const [searchResult, setSearchResult] = useState<any[]>([])
 
-    const products = useSelector((state: any) => state.product.products)
-
-    const dispatch = useDispatch()
+    const searchQuery = useSelector((state: any) => state.search.query.toLowerCase())
 
     useEffect(() => {
         (async function () {
@@ -24,26 +22,28 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
                 if (!result.docs) setEmptyMessage('Hubo un error en la carga de los productos')
 
-                if (result.docs.length < 1) setEmptyMessage('No se encontraron productos')
+                if (result.docs.length < 1) setEmptyMessage('No se encontraron productos en la base de datos')
 
-                dispatch(
-                    setProducts(
-                        result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-                    )
-                )
+                const allProducts = result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+
+                const searchResult = allProducts.filter((product: any) => product.name.toLowerCase().includes(searchQuery) || product.brand.toLowerCase().includes(searchQuery) || product.category.toLowerCase().includes(searchQuery))
+
+                if(searchResult.length < 1) setEmptyMessage('No se encontraron productos que coincidan con tu búsqueda')
+
+                setSearchResult(searchResult)
 
             })
             .catch(error => {
                 console.log(error)
             })
-    }, [])
+    }, [searchQuery])
 
     const ListEmptyComponent = () => <Text style={styles.loadingText}>{emptyMessage}</Text>
 
     return (
         <View style={styles.container}>
             <FlatList
-                data={products}
+                data={searchResult}
                 renderItem={({ item }) => <ProductPreview item={item} navigation={navigation} />}
                 numColumns={2}
                 style={styles.flatList}
@@ -54,4 +54,4 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     )
 }
 
-export default HomeScreen
+export default SearchScreen
