@@ -5,8 +5,8 @@ import { PRODUCT_IMAGE_URL } from '../../constants/Urls'
 import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../../store/product.slice'
-import { CartItem } from '../../models/CartItem';
+import { addToCart } from '../../store/cart.slice'
+import { CartItem } from '../../models/CartItem'
 
 const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: any, item: any }) => {
 
@@ -21,17 +21,20 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
     const [quantity, setQuantity] = useState(1)
     const [selectedColor, setSelectedColor] = useState(availableColors[0])
 
-    const handleAddToCart = () => {
-        setShowNotification(true)
-    }
+    const handleAddProduct = (redirect: boolean) => {
 
-    const handleBuyNow = () => {
         dispatch(
             addToCart(
                 new CartItem(id, name, selectedColor, quantity, price)
             )
         )
-        navigation.navigate('Cart')
+
+        redirect
+            ?
+            navigation.navigate('Cart')
+            :
+            setShowNotification(true)
+
     }
 
     return (
@@ -94,8 +97,8 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                         </View>
                     </View>
                     <View style={styles.buttonsContainer}>
-                        <ButtonSecondary onPress={handleAddToCart} title='Agregar al carrito' />
-                        <ButtonPrimary onPress={handleBuyNow} title='Comprar ahora' />
+                        <ButtonSecondary onPress={() => handleAddProduct(false)} title='Agregar al carrito' />
+                        <ButtonPrimary onPress={() => handleAddProduct(true)} title='Comprar ahora' />
                     </View>
                 </View>
             </ScrollView>

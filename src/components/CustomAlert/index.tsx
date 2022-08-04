@@ -26,10 +26,7 @@ const CustomAlert = ({ setShowAlert, optionAction, message, option }: { setShowA
 
     }
 
-    const handlePress = () => {
-        optionAction()
-        closeModal()
-    }
+    const handlePress = () => optionAction()
 
     return (
         <Modal

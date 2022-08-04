@@ -1,7 +1,7 @@
 import { Image, TouchableOpacity } from 'react-native'
 import { PRODUCT_IMAGE_URL } from '../../constants/Urls'
 import { styles } from './styles'
-import { primaryBg, grey } from '../../constants/Colors/index'
+import { primaryBg } from '../../constants/Colors/index'
 
 const Thumnail = ({ productId, imageNumber, handleSelectImage, numberMainImage }: { productId: number, imageNumber: number, handleSelectImage: Function, numberMainImage: number }) => {
     return (

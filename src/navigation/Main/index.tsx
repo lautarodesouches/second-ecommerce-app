@@ -12,7 +12,7 @@ const MainNavigator = () => {
         <Stack.Navigator
             initialRouteName='Home'
             screenOptions={{
-                headerStyle: {backgroundColor: 'red'},
+                headerStyle: { backgroundColor: 'red' },
                 header: (props) => <NavBar navigation={props.navigation} />
             }}
         >

@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     },
     productContainer: {
         marginVertical: 10,
-        borderRadius: 5, 
+        borderRadius: 5,
         borderColor: '#000',
         borderWidth: 1,
         padding: 10,

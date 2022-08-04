@@ -1,9 +1,8 @@
-import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import { Ionicons } from '@expo/vector-icons'
 import { primaryText, themeText } from '../../constants/Colors/index'
 import { useState } from 'react'
-import CustomButton from '../Buttons/Custom'
 import NavModal from '../NavModal'
 
 const NavBar = ({ navigation }: { navigation: any }) => {

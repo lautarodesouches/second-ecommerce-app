@@ -1,6 +1,5 @@
 import { ColorValue, KeyboardTypeOptions, Text, TextInput, View } from 'react-native'
 import { styles } from './styles'
-import { useState } from 'react';
 
 const CustomInput = (
     { label, helpMessage, keyboardType, placeholder = label, placeholderTextColor, value, onChangeText, onEndEditing = () => { } }: { label: string, helpMessage: string, keyboardType: KeyboardTypeOptions, placeholder?: string, placeholderTextColor?: ColorValue, value: string, onChangeText: any, onEndEditing?: any }) => {

@@ -8,8 +8,9 @@ export const styles = StyleSheet.create({
         backgroundColor: '#00000099'
     },
     alert: {
+        padding: 10,
         width: '70%',
-        height: '50%',
+        height: '40%',
         backgroundColor: '#fff',
         borderRadius: 5,
         shadowColor: "#000",
@@ -27,6 +28,7 @@ export const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         textAlign: 'center',
+        marginTop: 50,
         marginBottom: 20
     }
 })

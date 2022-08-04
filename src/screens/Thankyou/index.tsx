@@ -1,8 +1,8 @@
 import { FlatList, Text, View } from 'react-native'
-import { ProductPreview } from '../../components';
-import { products } from '../../utils/products';
-import { styles } from './styles';
-import ButtonSecondary from '../../components/Buttons/Secondary/index';
+import { ProductPreview } from '../../components'
+import { products } from '../../utils/products'
+import { styles } from './styles'
+import ButtonSecondary from '../../components/Buttons/Secondary/index'
 
 const ThankyouScreen = ({ navigation }: { navigation: any }) => {
 

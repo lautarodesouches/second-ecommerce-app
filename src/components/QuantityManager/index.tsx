@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 const QuantityManager = ({ amountAvailable, quantity, setQuantity }: { amountAvailable: number, quantity: number, setQuantity: Function }) => {
 
     const fadeAnim = useRef(new Animated.Value(0)).current
-    
+
     const [amountAvailableWarn, setAmountAvailableWarn] = useState(false)
     const [targetOpacity, setTargetOpacity] = useState(0)
     const [inputValue, setInputValue] = useState('')

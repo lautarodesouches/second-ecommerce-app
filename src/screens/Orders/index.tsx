@@ -5,7 +5,7 @@ import { styles } from './styles'
 const OrdersScreen = () => {
     return (
         <View style={styles.container}>
-            <OrderPreview order={{name: 'sda'}} />
+            <OrderPreview order={{ name: 'sda' }} />
         </View>
     )
 }

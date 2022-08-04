@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { ButtonPrimary, CustomInput } from '../../components'
 import { styles } from './styles'
 
