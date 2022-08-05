@@ -36,7 +36,7 @@ const NavBar = ({ navigation }: { navigation: any }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.iconsContainer}>
-                        <TouchableOpacity style={styles.icon} onPress={() => navigate('Auth')}>
+                        <TouchableOpacity style={styles.icon} onPress={() => navigate('User')}>
                             <Ionicons name='person-outline' size={24} color={themeText} />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.icon} onPress={() => navigate('Cart')}>

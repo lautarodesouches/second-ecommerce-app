@@ -1,24 +1,27 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavBar } from '../../components'
-import { CartScreen, CheckoutScreen, HomeScreen, AuthScreen, ProductDetailScreen, ThankyouScreen, OrdersScreen, SearchScreen } from '../../screens'
+import { CartScreen, CheckoutScreen, HomeScreen, LoginScreen, ProductDetailScreen, ThankyouScreen, OrdersScreen, SearchScreen, RegisterScreen } from '../../screens'
 
 const MainNavigator = () => {
 
     const Stack = createNativeStackNavigator()
 
-    const userId = 'null'
+    const userId = undefined
 
     return (
         <Stack.Navigator
-            initialRouteName='Home'
+            initialRouteName='Register'
             screenOptions={{
-                headerStyle: { backgroundColor: 'red' },
                 header: (props) => <NavBar navigation={props.navigation} />
             }}
         >
             <Stack.Screen
                 name='Home'
                 component={HomeScreen}
+            />
+            <Stack.Screen
+                name='Search'
+                component={SearchScreen}
             />
             <Stack.Screen
                 name='Detail'
@@ -28,26 +31,32 @@ const MainNavigator = () => {
                 name='Cart'
                 component={CartScreen}
             />
-            <Stack.Screen
-                name='Auth'
-                component={AuthScreen}
-            />
-            <Stack.Screen
-                name='Checkout'
-                component={userId ? CheckoutScreen : AuthScreen}
-            />
-            <Stack.Screen
-                name='Thankyou'
-                component={ThankyouScreen}
-            />
-            <Stack.Screen
-                name='Orders'
-                component={OrdersScreen}
-            />
-            <Stack.Screen
-                name='Search'
-                component={SearchScreen}
-            />
+            <Stack.Group>
+                <Stack.Screen
+                    name='Login'
+                    component={LoginScreen}
+                />
+                <Stack.Screen
+                    name='Register'
+                    component={RegisterScreen}
+                />
+            </Stack.Group>
+            <Stack.Group
+                navigationKey={userId ? 'user' : 'guest'}
+            >
+                <Stack.Screen
+                    name='Checkout'
+                    component={userId ? CheckoutScreen : RegisterScreen}
+                />
+                <Stack.Screen
+                    name='Thankyou'
+                    component={userId ? ThankyouScreen : RegisterScreen}
+                />
+                <Stack.Screen
+                    name='Orders'
+                    component={userId ? OrdersScreen : RegisterScreen}
+                />
+            </Stack.Group>
         </Stack.Navigator>
     )
 }

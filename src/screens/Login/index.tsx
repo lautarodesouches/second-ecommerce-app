@@ -2,34 +2,36 @@ import { Text, View } from 'react-native'
 import { useState } from 'react'
 import { styles } from './styles'
 import { ButtonPrimary, CustomInput } from '../../components'
-import { EMAIL_REGEX, PASSWORD_REGEX } from '../../validations'
+import { EMAIL_REGEX } from '../../validations'
 import { Input } from '../../models/Input'
 
-const AuthScreen = () => {
+const LoginScreen = () => {
 
-    const [isLogin, setIsLogin] = useState(true)
-
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<any>({
         email: new Input,
         password: new Input,
         isFormValid: false
     })
 
-    const updateForm = (inputName: string, value: string = '', error: string = '') => {
-        setForm({ ...form, [inputName]: new Input(value, error) })
+    const updateForm = (inputName: string, error: string = '') => {
+        setForm({ ...form, [inputName]: new Input(form[inputName].value, error) })
     }
 
     const isEmailOk = () => {
-        if (!EMAIL_REGEX.test(form.email.value)) {
-            updateForm('email', form.email.value, 'Email invalido')
-            return false
+        let isOk = false
+        if (form.email.value === '') {
+            updateForm('email', 'El campo no puede estar vacio')
+        } else if (!EMAIL_REGEX.test(form.email.value)) {
+            updateForm('email', 'Email invalido')
+        } else {
+            isOk = true
         }
-        return true
+        return isOk
     }
 
     const isPasswordOk = () => {
-        if (!PASSWORD_REGEX.test(form.password.value)) {
-            updateForm('password', form.password.value, 'Contraseña invalida')
+        if (form.password.value === '') {
+            updateForm('password', 'El campo no puede estar vacio')
             return false
         }
         return true
@@ -49,16 +51,18 @@ const AuthScreen = () => {
                 <CustomInput
                     label='Email'
                     helpMessage={form.email.error}
-                    keyboardType='default'
+                    keyboardType='email-address'
                     value={form.email.value}
+                    secureTextEntry={false}
                     onChangeText={(value: string) => setForm({ ...form, ['email']: new Input(value, '') })}
                     onEndEditing={isEmailOk}
                 />
                 <CustomInput
                     label='Contraseña'
                     helpMessage={form.password.error}
-                    keyboardType='default'
+                    keyboardType='ascii-capable'
                     value={form.password.value}
+                    secureTextEntry={true}
                     onChangeText={(value: string) => setForm({ ...form, ['password']: new Input(value, '') })}
                     onEndEditing={isPasswordOk}
                 />
@@ -70,4 +74,4 @@ const AuthScreen = () => {
     )
 }
 
-export default AuthScreen
+export default LoginScreen

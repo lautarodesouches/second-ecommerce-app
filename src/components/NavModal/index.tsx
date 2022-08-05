@@ -21,8 +21,8 @@ const NavModal = ({ closeModal, navigate }: { closeModal: VoidFunction, navigate
                 <View style={styles.content}>
                     <View>
                         <NavOption routeName='Home' title='Inicio' />
-                        <NavOption routeName='Auth' title='Iniciar sesión' />
-                        <NavOption routeName='Auth' title='Registrarse' />
+                        <NavOption routeName='Login' title='Iniciar sesión' />
+                        <NavOption routeName='Register' title='Registrarse' />
                         <NavOption routeName='Search' title='Buscar' />
                         <NavOption routeName='Cart' title='Carrito' />
                         <NavOption routeName='Orders' title='Ordenes' />
