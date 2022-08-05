@@ -9,6 +9,10 @@ export const styles = StyleSheet.create({
     flatList: {
         margin: 10
     },
+    contentContainer: {
+        flexGrow: 1,
+        justifyContent: 'center'
+    },
     loadingText: {
         textAlign: 'center',
         fontSize: 24

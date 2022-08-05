@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { themeBg, grey } from '../../constants/Colors/index'
+import { themeBg, grey, primaryBg } from '../../constants/Colors/index';
 
 export const styles = StyleSheet.create({
     container: {
@@ -22,7 +22,8 @@ export const styles = StyleSheet.create({
     },
     navText: {
         fontSize: 16,
-        fontFamily: 'RobotoRegular'
+        fontFamily: 'RobotoRegular',
+        color: primaryBg
     },
     imagesContainer: {
         height: 250,

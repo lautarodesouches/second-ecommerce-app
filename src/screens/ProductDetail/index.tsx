@@ -57,7 +57,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                         <TouchableOpacity onPress={() => search(category)}>
                             <Text style={styles.navText}>{category}</Text>
                         </TouchableOpacity>
-                        <Text style={styles.navText}>{' > '}</Text>
+                        <Text style={[styles.navText, {color: '#000'}]}>{' > '}</Text>
                         <TouchableOpacity onPress={() => search(brand)}>
                             <Text style={styles.navText}>{brand}</Text>
                         </TouchableOpacity>

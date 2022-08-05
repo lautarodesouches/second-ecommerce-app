@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 
 const SearchScreen = ({ navigation }: { navigation: any }) => {
 
-    const [emptyMessage, setEmptyMessage] = useState<string>('Cargando...')
+    const [emptyMessage, setEmptyMessage] = useState('Cargando...')
     const [searchResult, setSearchResult] = useState<any[]>([])
 
     const searchQuery = useSelector((state: any) => state.search.query.toLowerCase())

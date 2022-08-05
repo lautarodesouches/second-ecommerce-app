@@ -3,40 +3,54 @@ import { ProductPreview } from '../../components'
 import { styles } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
 import db from '../../utils/firebaseConfig'
-import { collection, getDocs, query } from 'firebase/firestore'
+import { collection, getDocs, limit, orderBy, query, startAt } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { setProducts } from '../../store/product.slice'
+import { addProducts, setProducts } from '../../store/product.slice'
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
 
+    const LIST_LIMIT = 10
+
+    const [lastDocument, setLastDocument] = useState(1)
     const [emptyMessage, setEmptyMessage] = useState('Cargando...')
 
     const products = useSelector((state: any) => state.product.products)
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        (async function () {
-            const querySnapshot = query(collection(db, 'products'))
+    const loadProducts = (firtsLoad: boolean) => {
+
+        // Limit queries to firebase
+        if (lastDocument > 21) return
+
+        (async () => {
+            const querySnapshot = query(collection(db, 'products'), orderBy("id"), startAt(lastDocument), limit(LIST_LIMIT))
             return await getDocs(querySnapshot)
         })()
             .then((result) => {
 
-                if (!result.docs) setEmptyMessage('Hubo un error en la carga de los productos')
-
-                if (result.docs.length < 1) setEmptyMessage('No se encontraron productos')
+                if (result.docs.length < 1) setEmptyMessage('Hubo un error en la carga de los productos')
 
                 dispatch(
-                    setProducts(
-                        result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-                    )
+                    firtsLoad
+                        ?
+                        setProducts(
+                            result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+                        )
+                        :
+                        addProducts(
+                            result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+                        )
                 )
 
             })
-            .catch(error => {
-                console.log(error)
-            })
-    }, [products.length < 1])
+            .catch(error => console.log(error))
+            .finally(() => setLastDocument(lastDocument + LIST_LIMIT))
+    }
+
+    useEffect(() => {
+        loadProducts(true)
+    }, [])
 
     const ListEmptyComponent = () => <Text style={styles.loadingText}>{emptyMessage}</Text>
 
@@ -47,8 +61,11 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                 renderItem={({ item }) => <ProductPreview item={item} navigation={navigation} />}
                 numColumns={2}
                 style={styles.flatList}
-                contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+                contentContainerStyle={styles.contentContainer}
                 ListEmptyComponent={ListEmptyComponent}
+                onEndReached={() => loadProducts(false)}
+                onEndReachedThreshold={1.5}
+                keyExtractor={(item) => item.id}
             />
         </View>
     )
