@@ -48,7 +48,7 @@ const QuantityManager = ({ amountAvailable, quantity, setQuantity }: { amountAva
             <Text style={styles.amountAvailable}>Disponible: {quantityText(amountAvailable)}</Text>
             <Animated.View style={[styles.selectQuantity, { opacity: fadeAnim, display: targetOpacity ? 'flex' : 'none' }]}>
                 {
-                    [...Array(4)].map((_, index) => <QuantityOption key={'option' + index} option={index + 1} />)
+                    [...Array(4)].map((_, index) => <QuantityOption key={index} option={index + 1} />)
                 }
                 <View style={[styles.optionContainer, { backgroundColor: quantity === parseInt(inputValue) ? primaryBg : '#fff' }]}>
                     <TextInput

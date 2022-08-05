@@ -36,7 +36,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             .catch(error => {
                 console.log(error)
             })
-    }, [])
+    }, [products.length < 1])
 
     const ListEmptyComponent = () => <Text style={styles.loadingText}>{emptyMessage}</Text>
 

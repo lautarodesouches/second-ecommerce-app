@@ -12,6 +12,7 @@ const NavBar = ({ navigation }: { navigation: any }) => {
     const dispatch = useDispatch()
 
     const globalQuery = useSelector((state: any) => state.search.query)
+    const cartLength = useSelector((state: any) => state.cart.cart.length)
 
     const [showModal, setShowModal] = useState(false)
     const [localQuery, setLocalQuery] = useState(globalQuery)
@@ -40,6 +41,13 @@ const NavBar = ({ navigation }: { navigation: any }) => {
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.icon} onPress={() => navigate('Cart')}>
                             <Ionicons name='cart-outline' size={24} color={themeText} />
+                            {
+                                cartLength > 0 && (
+                                    <View style={styles.cartLengthContainer}>
+                                        <Text style={styles.cartLengthText}>{cartLength}</Text>
+                                    </View>
+                                )
+                            }
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.icon} onPress={() => setShowModal(!showModal)}>
                             <Ionicons name='menu-sharp' size={24} color={themeText} />

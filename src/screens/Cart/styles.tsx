@@ -4,12 +4,12 @@ import { themeBg } from '../../constants/Colors/index'
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: themeBg,
+        backgroundColor: themeBg
     },
     contentContainer: {
         paddingHorizontal: '5%',
         flexGrow: 1,
-        justifyContent: 'center'
+        justifyContent: 'space-between'
     },
     total: {
         marginTop: 20,

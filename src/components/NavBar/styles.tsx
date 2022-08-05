@@ -47,5 +47,20 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderTopRightRadius: 5,
         borderBottomRightRadius: 5
+    },
+    cartLengthContainer: {
+        backgroundColor: 'red',
+        borderRadius: 50,
+        paddingHorizontal: 8,
+        paddingVertical: 2,
+        zIndex: 99,
+        position: 'absolute',
+        top: -10,
+        right: -15,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    cartLengthText: {
+        color: 'white'
     }
 })

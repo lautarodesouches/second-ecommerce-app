@@ -66,7 +66,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                         <View style={styles.thumnailImagesContainer}>
                             {
                                 [...Array(availableImages)].map((_, index) => (
-                                    <Thumnail key={'thumnail' + index} productId={id} imageNumber={index + 1} handleSelectImage={setNumberMainImage} numberMainImage={numberMainImage} />)
+                                    <Thumnail key={index} productId={id} imageNumber={index + 1} handleSelectImage={setNumberMainImage} numberMainImage={numberMainImage} />)
                                 )
                             }
                         </View>
@@ -85,7 +85,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                     <View style={styles.stars}>
                         {
                             [...Array(5)].map((_, index) =>
-                                <Ionicons key={'star' + index} size={28} color='#cc9900' name={stars >= index + 1 ? 'star' : (stars <= index ? 'star-outline' : 'star-half-sharp')} />
+                                <Ionicons key={index} size={28} color='#cc9900' name={stars >= index + 1 ? 'star' : (stars <= index ? 'star-outline' : 'star-half-sharp')} />
                             )
                         }
                     </View>

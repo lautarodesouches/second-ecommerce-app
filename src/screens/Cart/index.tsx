@@ -27,7 +27,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
                     showAlert && (
                         <CustomAlert
                             setShowAlert={setShowAlert}
-                            message='Estas seguro que querés todos el carrito?'
+                            message='Estas seguro que querés limpiar el carrito?'
                             option='Eliminar'
                             optionAction={() => dispatch(clearCart(''))}
                         />
@@ -63,10 +63,11 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
             <FlatList
                 contentContainerStyle={styles.contentContainer}
                 data={cart}
-                renderItem={({ item }) => <RenderCartItem item={item} />}
+                renderItem={({ item, index }) => <RenderCartItem key={index} item={item} />}
                 ListHeaderComponent={ListHeaderComponent}
                 ListFooterComponent={ListFooterComponent}
                 ListEmptyComponent={ListEmptyComponent}
+                keyExtractor={(item) => `${item.id}-${item.color}`}
             />
         </View>
     )

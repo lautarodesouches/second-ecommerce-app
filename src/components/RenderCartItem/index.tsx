@@ -21,23 +21,25 @@ const RenderCartItem = ({ item }: { item: any }) => {
 
     const [showAlert, setShowAlert] = useState(false)
 
+    const { id, color, name, quantity, subtotal } = item
+
     return (
-        <View key={item.id} style={styles.container}>
+        <View style={styles.container}>
             <CloseButton onPress={() => setShowAlert(true)} />
             <View style={styles.imageContainer}>
-                <Image source={{ uri: `${PRODUCT_IMAGE_URL}${item.id}-1.png` }} style={styles.image} />
+                <Image source={{ uri: `${PRODUCT_IMAGE_URL}${id}-1.png` }} style={styles.image} />
             </View>
-            <Info placeholder='Nombre' value={item.name} />
-            <Info placeholder='Color' value={capitalize(item.color)} />
-            <Info placeholder='Cantidad' value={item.quantity} />
-            <Info placeholder='Subtotal' value={'$' + item.subtotal} />
+            <Info placeholder='Nombre' value={name} />
+            <Info placeholder='Color' value={capitalize(color)} />
+            <Info placeholder='Cantidad' value={quantity} />
+            <Info placeholder='Subtotal' value={'$' + subtotal} />
             {
                 showAlert && (
                     <CustomAlert
                         setShowAlert={setShowAlert}
                         message='Estas seguro que querés eliminar?'
                         option='Eliminar'
-                        optionAction={() => dispatch(deleteCartItem(item.id))}
+                        optionAction={() => dispatch(deleteCartItem({ id, color }))}
                     />
                 )
             }
