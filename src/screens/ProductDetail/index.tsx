@@ -7,6 +7,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../store/cart.slice'
 import { CartItem } from '../../models/CartItem'
+import { setGlobalQuery } from '../../store/search.slice'
 
 const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: any, item: any }) => {
 
@@ -37,6 +38,11 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
 
     }
 
+    const search = (query: string) => {
+        dispatch(setGlobalQuery(query))
+        navigation.navigate('Search')
+    }
+
     return (
         <View style={styles.container}>
             {
@@ -45,11 +51,11 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
             <ScrollView style={styles.scroll}>
                 <View style={styles.productContainer}>
                     <View style={styles.nav}>
-                        <TouchableOpacity onPress={() => console.log(category)}>
+                        <TouchableOpacity onPress={() => search(category)}>
                             <Text style={styles.navText}>{category}</Text>
                         </TouchableOpacity>
                         <Text style={styles.navText}>{' > '}</Text>
-                        <TouchableOpacity onPress={() => console.log(brand)}>
+                        <TouchableOpacity onPress={() => search(brand)}>
                             <Text style={styles.navText}>{brand}</Text>
                         </TouchableOpacity>
                     </View>

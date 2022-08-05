@@ -4,15 +4,17 @@ import { Ionicons } from '@expo/vector-icons'
 import { primaryText, themeText } from '../../constants/Colors/index'
 import { useState } from 'react'
 import NavModal from '../NavModal'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setGlobalQuery } from '../../store/search.slice'
 
 const NavBar = ({ navigation }: { navigation: any }) => {
 
     const dispatch = useDispatch()
 
+    const globalQuery = useSelector((state: any) => state.search.query)
+
     const [showModal, setShowModal] = useState(false)
-    const [localQuery, setLocalQuery] = useState('')
+    const [localQuery, setLocalQuery] = useState(globalQuery)
 
     const navigate = (screen: string) => navigation.navigate(screen)
 
@@ -20,7 +22,6 @@ const NavBar = ({ navigation }: { navigation: any }) => {
 
     const saveAndNavigate = () => {
         dispatch(setGlobalQuery(localQuery))
-        setLocalQuery('')
         navigate('Search')
     }
 
