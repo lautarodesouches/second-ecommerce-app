@@ -3,7 +3,8 @@ import { grey } from '../../constants/Colors'
 
 export const styles = StyleSheet.create({
     infoContainer: {
-        marginTop: 10
+        flex: 0.5,
+        margin: 10
     },
     placeholder: {
         fontSize: 14,

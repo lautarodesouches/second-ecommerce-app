@@ -5,15 +5,17 @@ export class CartItem {
     color: string
     quantity: number
     price: number
+    shipping: number
     subtotal: number
 
-    constructor(id: number, name: string, color: string, quantity: number, price: number) {
+    constructor(id: number, name: string, color: string, quantity: number, price: number, shipping: number) {
         this.id = id
         this.name = name
         this.color = color
         this.quantity = quantity
         this.price = price
-        this.subtotal = quantity * price
+        this.shipping = shipping
+        this.subtotal = quantity * price + quantity * shipping
     }
 
 }

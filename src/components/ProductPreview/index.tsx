@@ -9,8 +9,9 @@ const ProductPreview = ({ item, navigation }: { item: any, navigation: any }) =>
 
     const { id, name, price, discount, freeShipping } = item
 
-    return (
+    const shippingCost = freeShipping ? 0 : 500
 
+    return (
         <TouchableOpacity style={styles.container} onPress={handleProductSelect}>
             <View style={styles.imageContainer}>
                 <Image source={{ uri: `${PRODUCT_IMAGE_URL}${id}-1.png` }} style={styles.image} />
@@ -19,7 +20,8 @@ const ProductPreview = ({ item, navigation }: { item: any, navigation: any }) =>
                 <Text style={styles.title}>{name}</Text>
                 <PriceInfo
                     discount={discount}
-                    freeShipping={freeShipping}
+                    shippingCost={shippingCost}
+                    showShippingCost={false}
                     price={price}
                 />
             </View>

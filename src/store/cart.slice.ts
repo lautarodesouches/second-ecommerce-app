@@ -12,6 +12,7 @@ const cartSlice = createSlice({
         addToCart: (state, action) => {
             let findItem = state.cart.find(item => (item.id === action.payload.id && item.color === action.payload.color))
             if (findItem) {
+                findItem.shipping += action.payload.shipping
                 findItem.quantity += action.payload.quantity
                 let cartFilter = state.cart.filter(item => (item.id !== action.payload.id || item.color !== action.payload.color))
                 cartFilter.push(findItem)

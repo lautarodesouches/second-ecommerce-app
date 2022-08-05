@@ -21,7 +21,7 @@ const RenderCartItem = ({ item }: { item: any }) => {
 
     const [showAlert, setShowAlert] = useState(false)
 
-    const { id, color, name, quantity, subtotal } = item
+    const { id, color, name, quantity, price, shipping, subtotal } = item
 
     return (
         <View style={styles.container}>
@@ -30,8 +30,14 @@ const RenderCartItem = ({ item }: { item: any }) => {
                 <Image source={{ uri: `${PRODUCT_IMAGE_URL}${id}-1.png` }} style={styles.image} />
             </View>
             <Info placeholder='Nombre' value={name} />
-            <Info placeholder='Color' value={capitalize(color)} />
-            <Info placeholder='Cantidad' value={quantity} />
+            <View style={{ flexDirection: 'row' }}>
+                <Info placeholder='Color' value={capitalize(color)} />
+                <Info placeholder='Envio' value={'$' + shipping} />
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+                <Info placeholder='Cantidad' value={quantity} />
+                <Info placeholder='Precio' value={'$' + price} />
+            </View>
             <Info placeholder='Subtotal' value={'$' + subtotal} />
             {
                 showAlert && (

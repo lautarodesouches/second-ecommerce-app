@@ -33,5 +33,11 @@ export const styles = StyleSheet.create({
         color: green,
         marginTop: 7,
         fontFamily: 'RobotoRegular'
+    },
+    shippingCost: {
+        marginTop: 7,
+        fontFamily: 'RobotoRegular',
+        fontSize: 18,
+        textAlign: 'center'
     }
 })

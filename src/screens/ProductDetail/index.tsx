@@ -22,11 +22,14 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
     const [quantity, setQuantity] = useState(1)
     const [selectedColor, setSelectedColor] = useState(availableColors[0])
 
+    const shippingCost = freeShipping ? 0 : quantity * 500
+    const getPrice = discount ? (Math.round(price - price * discount / 100)) : price
+
     const handleAddProduct = (redirect: boolean) => {
 
         dispatch(
             addToCart(
-                new CartItem(id, name, selectedColor, quantity, price)
+                new CartItem(id, name, selectedColor, quantity, getPrice, shippingCost)
             )
         )
 
@@ -74,7 +77,8 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                     <Text style={styles.title}>{name}</Text>
                     <PriceInfo
                         discount={discount}
-                        freeShipping={freeShipping}
+                        shippingCost={shippingCost}
+                        showShippingCost={true}
                         price={price}
                     />
                     <Text style={styles.description}>{description}</Text>

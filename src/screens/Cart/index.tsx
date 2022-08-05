@@ -50,12 +50,12 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
     }
 
     const ListEmptyComponent = () => (
-        <>
+        <View>
             <Text style={styles.emptyText}>El carrito se encuentra vacío</Text>
             <View style={styles.buttonContainer}>
                 <ButtonPrimary onPress={() => navigation.navigate('Home')} title='Volver al inicio' />
             </View>
-        </>
+        </View>
     )
 
     return (
@@ -63,11 +63,11 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
             <FlatList
                 contentContainerStyle={styles.contentContainer}
                 data={cart}
-                renderItem={({ item, index }) => <RenderCartItem key={index} item={item} />}
+                renderItem={({ item }) => <RenderCartItem item={item} />}
                 ListHeaderComponent={ListHeaderComponent}
                 ListFooterComponent={ListFooterComponent}
                 ListEmptyComponent={ListEmptyComponent}
-                keyExtractor={(item) => `${item.id}-${item.color}`}
+                keyExtractor={item => item.id + item.color}
             />
         </View>
     )

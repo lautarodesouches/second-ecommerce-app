@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native'
 import { styles } from './styles'
 
-const PriceInfo = ({ discount, price, freeShipping }: { discount: number, price: number, freeShipping: boolean }) => {
+const PriceInfo = ({ discount, price, shippingCost, showShippingCost }: { discount: number, price: number, shippingCost: number, showShippingCost: boolean }) => {
     return (
         <>
             {
@@ -16,9 +16,11 @@ const PriceInfo = ({ discount, price, freeShipping }: { discount: number, price:
                 }
             </View>
             {
-                freeShipping && (
+                shippingCost === 0
+                    ?
                     <Text style={styles.freeShipping}>Envio Gratis!</Text>
-                )
+                    :
+                    (showShippingCost && <Text style={styles.shippingCost}>Envio: ${shippingCost}</Text>)
             }
         </>
     )

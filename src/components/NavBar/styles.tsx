@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
         borderTopLeftRadius: 5,
         borderBottomLeftRadius: 5,
         borderWidth: 1,
+        borderColor: primaryBg,
         fontSize: 16,
         paddingVertical: 5,
         paddingHorizontal: 10,
@@ -45,6 +46,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
+        borderColor: primaryBg,
         borderTopRightRadius: 5,
         borderBottomRightRadius: 5
     },
