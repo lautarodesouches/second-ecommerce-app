@@ -1,16 +1,17 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavBar } from '../../components'
-import { CartScreen, CheckoutScreen, HomeScreen, LoginScreen, ProductDetailScreen, ThankyouScreen, OrdersScreen, SearchScreen, RegisterScreen } from '../../screens'
+import { CartScreen, CheckoutScreen, HomeScreen, LoginScreen, ProductDetailScreen, ThankyouScreen, OrdersScreen, SearchScreen, RegisterScreen, UserScreen } from '../../screens'
+import { useSelector } from 'react-redux'
 
 const MainNavigator = () => {
 
     const Stack = createNativeStackNavigator()
 
-    const userId = undefined
+    const userId = useSelector((state: any) => state.auth.userId)
 
     return (
         <Stack.Navigator
-            initialRouteName='Register'
+            initialRouteName='Home'
             screenOptions={{
                 header: (props) => <NavBar navigation={props.navigation} />
             }}
@@ -33,28 +34,30 @@ const MainNavigator = () => {
             />
             <Stack.Group>
                 <Stack.Screen
+                    name='User'
+                    component={userId ? UserScreen : LoginScreen}
+                />
+                <Stack.Screen
                     name='Login'
-                    component={LoginScreen}
+                    component={userId ? UserScreen : LoginScreen}
                 />
                 <Stack.Screen
                     name='Register'
-                    component={RegisterScreen}
+                    component={userId ? UserScreen : RegisterScreen}
                 />
             </Stack.Group>
-            <Stack.Group
-                navigationKey={userId ? 'user' : 'guest'}
-            >
+            <Stack.Group>
                 <Stack.Screen
                     name='Checkout'
-                    component={userId ? CheckoutScreen : RegisterScreen}
+                    component={userId ? CheckoutScreen : LoginScreen}
                 />
                 <Stack.Screen
                     name='Thankyou'
-                    component={userId ? ThankyouScreen : RegisterScreen}
+                    component={userId ? ThankyouScreen : LoginScreen}
                 />
                 <Stack.Screen
                     name='Orders'
-                    component={userId ? OrdersScreen : RegisterScreen}
+                    component={userId ? OrdersScreen : LoginScreen}
                 />
             </Stack.Group>
         </Stack.Navigator>

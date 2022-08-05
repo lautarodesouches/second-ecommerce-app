@@ -5,25 +5,20 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: themeBg,
-        padding: '5%',
+        alignItems: 'center',
         justifyContent: 'center'
     },
-    form: {
-        borderRadius: 5,
-        backgroundColor: '#fff',
-        padding: '5%'
-    },
     title: {
-        fontSize: 24,
-        textAlign: 'center',
-        marginBottom: 20
+        fontSize: 26,
+        fontFamily: 'RobotoRegular',
+        textAlign: 'center'
     },
-    buttonContainer: {
+    infoContainer: {
         marginTop: 20
     },
-    authMessage: {
-        marginTop: 20,
+    infoText: {
         fontSize: 18,
+        fontFamily: 'RobotoRegular',
         textAlign: 'center'
-    }
+    },
 })

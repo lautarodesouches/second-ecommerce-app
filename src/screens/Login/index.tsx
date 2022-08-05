@@ -4,13 +4,18 @@ import { styles } from './styles'
 import { ButtonPrimary, CustomInput } from '../../components'
 import { EMAIL_REGEX } from '../../validations'
 import { Input } from '../../models/Input'
+import { useDispatch, useSelector } from 'react-redux'
+import { auth } from '../../store/auth.slice'
 
 const LoginScreen = () => {
 
+    const dispatch: any = useDispatch()
+
+    const authState = useSelector((state: any) => state.auth)
+
     const [form, setForm] = useState<any>({
         email: new Input,
-        password: new Input,
-        isFormValid: false
+        password: new Input
     })
 
     const updateForm = (inputName: string, error: string = '') => {
@@ -38,9 +43,10 @@ const LoginScreen = () => {
     }
 
     const validateForm = () => {
-        setForm({ ...form, ['isFormValid']: false })
         if (isEmailOk() && isPasswordOk()) {
-            setForm({ ...form, ['isFormValid']: true })
+            dispatch(
+                auth(true, form.email.value, form.password.value)
+            )
         }
     }
 
@@ -69,6 +75,9 @@ const LoginScreen = () => {
                 <View style={styles.buttonContainer}>
                     <ButtonPrimary onPress={validateForm} title='Ingresar' />
                 </View>
+                {
+                    !!authState.message && <Text style={styles.authMessage}>{authState.message}</Text>
+                }
             </View>
         </View>
     )

@@ -20,5 +20,10 @@ export const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginTop: 20
+    },
+    authMessage: {
+        marginTop: 20,
+        fontSize: 18,
+        textAlign: 'center'
     }
 })

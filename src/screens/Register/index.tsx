@@ -4,14 +4,19 @@ import { styles } from './styles'
 import { ButtonPrimary, CustomInput } from '../../components'
 import { EMAIL_REGEX, EIGHT_CHARACTERS, ONE_UPPERCASE, ONE_LOWERCASE, ONE_NUMBER, ONE_SPECIAL } from '../../validations'
 import { Input } from '../../models/Input'
+import { useDispatch, useSelector } from 'react-redux'
+import { auth } from '../../store/auth.slice'
 
 const RegisterScreen = () => {
+
+    const dispatch: any = useDispatch()
+
+    const authState = useSelector((state: any) => state.auth)
 
     const [form, setForm] = useState<any>({
         email: new Input,
         password: new Input,
-        repeatPassword: new Input,
-        isFormValid: false
+        repeatPassword: new Input
     })
 
     const updateForm = (inputName: string, error: string = '') => {
@@ -109,9 +114,10 @@ const RegisterScreen = () => {
     }
 
     const validateForm = () => {
-        setForm({ ...form, ['isFormValid']: false })
         if (isEmailOk() && isPasswordOk() && isRepeatPasswordOk()) {
-            setForm({ ...form, ['isFormValid']: true })
+            dispatch(
+                auth(false, form.email.value, form.password.value)
+            )
         }
     }
 
@@ -149,6 +155,9 @@ const RegisterScreen = () => {
                 <View style={styles.buttonContainer}>
                     <ButtonPrimary onPress={validateForm} title='Registrarme' />
                 </View>
+                {
+                    !!authState.message && <Text style={styles.authMessage}>{authState.message}</Text>
+                }
             </View>
         </View>
     )

@@ -11,6 +11,8 @@ const NavBar = ({ navigation }: { navigation: any }) => {
 
     const dispatch = useDispatch()
 
+    const userId = useSelector((state: any) => state.auth.userId)
+
     const globalQuery = useSelector((state: any) => state.search.query)
     const cartLength = useSelector((state: any) => state.cart.cart.length)
 
@@ -36,9 +38,13 @@ const NavBar = ({ navigation }: { navigation: any }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.iconsContainer}>
-                        <TouchableOpacity style={styles.icon} onPress={() => navigate('User')}>
-                            <Ionicons name='person-outline' size={24} color={themeText} />
-                        </TouchableOpacity>
+                        {
+                            userId && (
+                                <TouchableOpacity style={styles.icon} onPress={() => navigate('User')}>
+                                    <Ionicons name='person-outline' size={24} color={themeText} />
+                                </TouchableOpacity>
+                            )
+                        }
                         <TouchableOpacity style={styles.icon} onPress={() => navigate('Cart')}>
                             <Ionicons name='cart-outline' size={24} color={themeText} />
                             {
