@@ -29,7 +29,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
                             setShowAlert={setShowAlert}
                             message='Estas seguro que querés limpiar el carrito?'
                             option='Eliminar'
-                            optionAction={() => dispatch(clearCart(''))}
+                            optionAction={() => dispatch(clearCart())}
                         />
                     )
                 }

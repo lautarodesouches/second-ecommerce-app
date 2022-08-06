@@ -21,6 +21,14 @@ const authSlice = createSlice({
             if (action.payload.token) state.token = action.payload.token
             if (action.payload.userId) state.userId = action.payload.userId
             if (action.payload.message) state.message = action.payload.message
+        },
+        logout: (state) => {
+            state.name = null
+            state.address = null
+            state.creditCard = null
+            state.token = null
+            state.userId = null
+            state.message = null
         }
     }
 })
@@ -57,6 +65,6 @@ export const auth = (isLogIn: boolean, email: string, password: string) => (
     }
 )
 
-export const { updateAuth } = authSlice.actions
+export const { updateAuth, logout } = authSlice.actions
 
 export default authSlice.reducer

@@ -4,8 +4,7 @@ export const styles = StyleSheet.create({
     container: {
         shadowColor: 'crimson',
         backgroundColor: 'crimson',
-        borderColor: 'crimson',
-        borderWidth: 1
+        borderColor: 'crimson'
     },
     text: {
         color: '#fff'

@@ -4,7 +4,8 @@ import { primaryBg, primaryText } from '../../../constants/Colors'
 export const styles = StyleSheet.create({
     container: {
         shadowColor: primaryBg,
-        backgroundColor: primaryBg
+        backgroundColor: primaryBg,
+        borderColor: primaryBg
     },
     text: {
         color: primaryText

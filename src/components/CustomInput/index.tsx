@@ -2,7 +2,7 @@ import { ColorValue, KeyboardTypeOptions, Text, TextInput, View } from 'react-na
 import { styles } from './styles'
 
 const CustomInput = (
-    { label, helpMessage, keyboardType, placeholder = label, placeholderTextColor, value, secureTextEntry, onChangeText, onEndEditing = () => { } }: { label: string, helpMessage: string, keyboardType: KeyboardTypeOptions, placeholder?: string, placeholderTextColor?: ColorValue, value: string, secureTextEntry: boolean, onChangeText: any, onEndEditing?: any }) => {
+    { label, helpMessage, keyboardType, placeholder = label, placeholderTextColor, value, secureTextEntry, onChangeText, onEndEditing = () => { }, ref }: { label: string, helpMessage: string, keyboardType: KeyboardTypeOptions, placeholder?: string, placeholderTextColor?: ColorValue, value: string, secureTextEntry: boolean, onChangeText: any, onEndEditing?: any, ref?: any }) => {
 
     return (
         <View style={styles.container}>
@@ -17,6 +17,7 @@ const CustomInput = (
                 onChangeText={e => onChangeText(e)}
                 onEndEditing={onEndEditing}
                 secureTextEntry={secureTextEntry}
+                ref={ref}
             />
             {
                 !!helpMessage && <Text style={styles.help}>{helpMessage}</Text>

@@ -2,7 +2,7 @@ import { Text, View } from 'react-native'
 import { useState } from 'react'
 import { styles } from './styles'
 import { ButtonPrimary, CustomInput } from '../../components'
-import { EMAIL_REGEX, EIGHT_CHARACTERS, ONE_UPPERCASE, ONE_LOWERCASE, ONE_NUMBER, ONE_SPECIAL } from '../../validations'
+import { REGEX_EMAIL, REGEX_EIGHT_CHARACTERS, REGEX_ONE_UPPERCASE, REGEX_ONE_LOWERCASE, REGEX_ONE_NUMBER, REGEX_ONE_SPECIAL } from '../../validations'
 import { Input } from '../../models/Input'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../store/auth.slice'
@@ -33,7 +33,7 @@ const RegisterScreen = () => {
 
             updateForm(input, 'El campo no puede estar vacio')
 
-        } else if (!EMAIL_REGEX.test(value)) {
+        } else if (!REGEX_EMAIL.test(value)) {
 
             updateForm(input, 'Email invalido')
 
@@ -61,23 +61,23 @@ const RegisterScreen = () => {
 
             updateForm(input, messageStart + '')
 
-        } else if (!EIGHT_CHARACTERS.test(value)) {
+        } else if (!REGEX_EIGHT_CHARACTERS.test(value)) {
 
             updateForm(input, messageStart + '8 caracteres')
 
-        } else if (!ONE_LOWERCASE.test(value)) {
+        } else if (!REGEX_ONE_LOWERCASE.test(value)) {
 
             updateForm(input, messageStart + 'una letra minúscula')
 
-        } else if (!ONE_UPPERCASE.test(value)) {
+        } else if (!REGEX_ONE_UPPERCASE.test(value)) {
 
             updateForm(input, messageStart + 'una letra mayúscula')
 
-        } else if (!ONE_NUMBER.test(value)) {
+        } else if (!REGEX_ONE_NUMBER.test(value)) {
 
             updateForm(input, messageStart + 'un numero')
 
-        } else if (!ONE_SPECIAL.test(value)) {
+        } else if (!REGEX_ONE_SPECIAL.test(value)) {
 
             updateForm(input, messageStart + 'un caracter especial')
 

@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
         textAlign: 'center'
     },
     infoContainer: {
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 30
     },
     infoText: {
         fontSize: 18,

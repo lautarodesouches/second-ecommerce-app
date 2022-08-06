@@ -1,8 +1,8 @@
 import { Text, View } from 'react-native'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { styles } from './styles'
 import { ButtonPrimary, CustomInput } from '../../components'
-import { EMAIL_REGEX } from '../../validations'
+import { REGEX_EMAIL } from '../../validations'
 import { Input } from '../../models/Input'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../store/auth.slice'
@@ -18,6 +18,10 @@ const LoginScreen = () => {
         password: new Input
     })
 
+    useEffect(() => {
+        setForm({ ...form, email: new Input(authState.email) })
+    }, [authState])
+
     const updateForm = (inputName: string, error: string = '') => {
         setForm({ ...form, [inputName]: new Input(form[inputName].value, error) })
     }
@@ -26,7 +30,7 @@ const LoginScreen = () => {
         let isOk = false
         if (form.email.value === '') {
             updateForm('email', 'El campo no puede estar vacio')
-        } else if (!EMAIL_REGEX.test(form.email.value)) {
+        } else if (!REGEX_EMAIL.test(form.email.value)) {
             updateForm('email', 'Email invalido')
         } else {
             isOk = true

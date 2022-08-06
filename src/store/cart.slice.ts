@@ -24,7 +24,7 @@ const cartSlice = createSlice({
         deleteCartItem: (state, action) => {
             state.cart = state.cart.filter(item => (item.id !== action.payload.id || item.color !== action.payload.color))
         },
-        clearCart: (state, action) => {
+        clearCart: (state) => {
             state.cart = []
         }
     }
