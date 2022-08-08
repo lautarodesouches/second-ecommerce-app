@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import { ColorOption, Notification, PriceInfo, ButtonPrimary, ButtonSecondary, Thumnail, QuantityManager } from '../../components'
+import { ColorOption, Notification, PriceInfo, ButtonPrimary, ButtonSecondary, Thumnail, QuantityManager, ButtonDanger } from '../../components'
 import { PRODUCT_IMAGE_URL } from '../../constants/Urls'
 import { styles } from './styles'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../store/cart.slice'
 import { CartItem } from '../../models/CartItem'
 import { setGlobalQuery } from '../../store/search.slice'
@@ -13,9 +13,19 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
 
     const dispatch = useDispatch()
 
+    const cart = useSelector((state: any) => state.cart.cart)
+
     const { item } = route.params
 
     const { id, name, brand, category, price, discount, sold, opinions, stars, amountAvailable, freeShipping, availableImages, availableColors, description } = item
+
+    const itemsInCart = cart.filter((item: any) => item.id === id)
+
+    let quantityInCart = 0
+
+    if (itemsInCart.length > 0) quantityInCart = itemsInCart.reduce((acc: number, item: CartItem) => acc + item.quantity, 0)
+
+    const newAmountAvailable = amountAvailable - quantityInCart
 
     const [numberMainImage, setNumberMainImage] = useState(1)
     const [showNotification, setShowNotification] = useState(false)
@@ -57,7 +67,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                         <TouchableOpacity onPress={() => search(category)}>
                             <Text style={styles.navText}>{category}</Text>
                         </TouchableOpacity>
-                        <Text style={[styles.navText, {color: '#000'}]}>{' > '}</Text>
+                        <Text style={[styles.navText, { color: '#000' }]}>{' > '}</Text>
                         <TouchableOpacity onPress={() => search(brand)}>
                             <Text style={styles.navText}>{brand}</Text>
                         </TouchableOpacity>
@@ -94,7 +104,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                         }
                     </View>
                     <QuantityManager
-                        amountAvailable={amountAvailable}
+                        amountAvailable={newAmountAvailable}
                         quantity={quantity}
                         setQuantity={setQuantity}
                     />
@@ -107,8 +117,16 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                         </View>
                     </View>
                     <View style={styles.buttonsContainer}>
-                        <ButtonSecondary onPress={() => handleAddProduct(false)} title='Agregar al carrito' />
-                        <ButtonPrimary onPress={() => handleAddProduct(true)} title='Comprar ahora' />
+                        {
+                            newAmountAvailable > 0
+                                ?
+                                <>
+                                    <ButtonSecondary onPress={() => handleAddProduct(false)} title='Agregar al carrito' />
+                                    <ButtonPrimary onPress={() => handleAddProduct(true)} title='Comprar ahora' />
+                                </>
+                                :
+                                <ButtonDanger onPress={() => {}} title='No hay mas disponibles' />
+                        }
                     </View>
                 </View>
             </ScrollView>

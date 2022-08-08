@@ -64,7 +64,7 @@ const QuantityManager = ({ amountAvailable, quantity, setQuantity }: { amountAva
             </Animated.View>
             {
                 amountAvailableWarn && (
-                    <Text style={styles.inputWarn}>Solo hay {amountAvailable} unidades disponibles</Text>
+                    <Text style={styles.inputWarn}>Hay {amountAvailable} unidades disponibles</Text>
                 )
             }
         </View>
