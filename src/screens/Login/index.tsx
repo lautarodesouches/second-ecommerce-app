@@ -18,12 +18,22 @@ const LoginScreen = () => {
         password: new Input
     })
 
-    const updateForm = () => setForm({ ...form })
+    let message = 'Ha ocurrido un error'
+    if (authState.message) {
+        switch (authState.message) {
+            case 'INVALID_PASSWORD':
+                message = 'Contraseña inválida'
+                break
+            case 'TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.':
+                message = 'Demasiados intentos fallidos, el acceso ha sido temporalmente restringido'
+                break
+            default:
+                console.log(authState.message)
+                break
+        }
+    }
 
-    useEffect(() => {
-        form.email.setValue(authState.email)
-        updateForm()
-    }, [authState])
+    const updateForm = () => setForm({ ...form })
 
     const isEmailOk = () => {
 
@@ -72,6 +82,11 @@ const LoginScreen = () => {
         updateForm()
     }
 
+    useEffect(() => {
+        form.email.setValue(authState.email)
+        updateForm()
+    }, [authState])
+
     return (
         <View style={styles.container}>
             <View style={styles.form}>
@@ -98,7 +113,7 @@ const LoginScreen = () => {
                     <ButtonPrimary onPress={validateForm} title='Ingresar' />
                 </View>
                 {
-                    !!authState.message && <Text style={styles.authMessage}>{authState.message}</Text>
+                    !!authState.message && <Text style={styles.authMessage}>{message}</Text>
                 }
             </View>
         </View>

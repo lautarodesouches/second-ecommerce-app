@@ -19,6 +19,18 @@ const RegisterScreen = () => {
         repeatPassword: new Input
     })
 
+    let message = 'Ha ocurrido un error'
+    if (authState.message) {
+        switch (authState.message) {
+            case 'EMAIL_EXISTS':
+                message = 'El email ya está registrado'
+                break
+            default:
+                console.log(authState.message)
+                break
+        }
+    }
+
     const updateForm = () => setForm({ ...form })
 
     const isEmailOk = () => {
@@ -130,7 +142,7 @@ const RegisterScreen = () => {
                     <ButtonPrimary onPress={validateForm} title='Registrarme' />
                 </View>
                 {
-                    !!authState.message && <Text style={styles.authMessage}>{authState.message}</Text>
+                    !!authState.message && <Text style={styles.authMessage}>{message}</Text>
                 }
             </View>
         </View>
