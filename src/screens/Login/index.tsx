@@ -18,31 +18,43 @@ const LoginScreen = () => {
         password: new Input
     })
 
+    const updateForm = () => setForm({ ...form })
+
     useEffect(() => {
-        setForm({ ...form, email: new Input(authState.email) })
+        form.email.setValue(authState.email)
+        updateForm()
     }, [authState])
 
-    const updateForm = (inputName: string, error: string = '') => {
-        setForm({ ...form, [inputName]: new Input(form[inputName].value, error) })
-    }
-
     const isEmailOk = () => {
-        let isOk = false
-        if (form.email.value === '') {
-            updateForm('email', 'El campo no puede estar vacio')
-        } else if (!REGEX_EMAIL.test(form.email.value)) {
-            updateForm('email', 'Email invalido')
+
+        const input = form.email
+
+        if (input.value === '') {
+            input.setError('El campo no puede estar vacio')
+        } else if (!REGEX_EMAIL.test(input.value)) {
+            input.setError('Email invalido')
         } else {
-            isOk = true
+            input.setError('')
+            return true
         }
-        return isOk
+
+        updateForm()
+
+        return false
     }
 
     const isPasswordOk = () => {
-        if (form.password.value === '') {
-            updateForm('password', 'El campo no puede estar vacio')
+
+        const input = form.password
+
+        if (input.value === '') {
+            input.setError('El campo no puede estar vacio')
             return false
         }
+
+        updateForm()
+
+        input.setError('')
         return true
     }
 
@@ -52,6 +64,12 @@ const LoginScreen = () => {
                 auth(true, form.email.value, form.password.value)
             )
         }
+    }
+
+    const handleChangeText = (input: string, value: string) => {
+        form[input].setValue(value)
+        form[input].setError('')
+        updateForm()
     }
 
     return (
@@ -64,7 +82,7 @@ const LoginScreen = () => {
                     keyboardType='email-address'
                     value={form.email.value}
                     secureTextEntry={false}
-                    onChangeText={(value: string) => setForm({ ...form, ['email']: new Input(value, '') })}
+                    onChangeText={(value: string) => handleChangeText('email', value)}
                     onEndEditing={isEmailOk}
                 />
                 <CustomInput
@@ -73,7 +91,7 @@ const LoginScreen = () => {
                     keyboardType='ascii-capable'
                     value={form.password.value}
                     secureTextEntry={true}
-                    onChangeText={(value: string) => setForm({ ...form, ['password']: new Input(value, '') })}
+                    onChangeText={(value: string) => handleChangeText('password', value)}
                     onEndEditing={isPasswordOk}
                 />
                 <View style={styles.buttonContainer}>

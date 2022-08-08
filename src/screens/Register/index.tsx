@@ -19,98 +19,66 @@ const RegisterScreen = () => {
         repeatPassword: new Input
     })
 
-    const updateForm = (inputName: string, error: string = '') => {
-        setForm({ ...form, [inputName]: new Input(form[inputName].value, error) })
-    }
+    const updateForm = () => setForm({ ...form })
 
     const isEmailOk = () => {
 
-        let isOk = false
-        const value = form.email.value
-        const input = 'email'
+        const input = form.email
 
-        if (value === '') {
-
-            updateForm(input, 'El campo no puede estar vacio')
-
-        } else if (!REGEX_EMAIL.test(value)) {
-
-            updateForm(input, 'Email invalido')
-
+        if (input.value === '') {
+            input.setError('El campo no puede estar vacio')
+        } else if (!REGEX_EMAIL.test(input.value)) {
+            input.setError('Email invalido')
         } else {
-
-            isOk = true
-
+            return true
         }
 
-        return isOk
+        updateForm()
+
+        return false
     }
 
     const isPasswordOk = () => {
 
-        let isOk = false
-        const input = 'password'
-        const value = form[input].value
+        const input = form.password
         const messageStart = 'La contraseña debe tener al menos '
 
-        if (value === '') {
-
-            updateForm(input, 'El campo no puede estar vacio')
-
-        } else if (value !== form.password.value) {
-
-            updateForm(input, messageStart + '')
-
-        } else if (!REGEX_EIGHT_CHARACTERS.test(value)) {
-
-            updateForm(input, messageStart + '8 caracteres')
-
-        } else if (!REGEX_ONE_LOWERCASE.test(value)) {
-
-            updateForm(input, messageStart + 'una letra minúscula')
-
-        } else if (!REGEX_ONE_UPPERCASE.test(value)) {
-
-            updateForm(input, messageStart + 'una letra mayúscula')
-
-        } else if (!REGEX_ONE_NUMBER.test(value)) {
-
-            updateForm(input, messageStart + 'un numero')
-
-        } else if (!REGEX_ONE_SPECIAL.test(value)) {
-
-            updateForm(input, messageStart + 'un caracter especial')
-
+        if (input.value === '') {
+            input.setError('El campo no puede estar vacio')
+        } else if (!REGEX_EIGHT_CHARACTERS.test(input.value)) {
+            input.setError(messageStart + '8 caracteres')
+        } else if (!REGEX_ONE_LOWERCASE.test(input.value)) {
+            input.setError(messageStart + 'una letra minúscula')
+        } else if (!REGEX_ONE_UPPERCASE.test(input.value)) {
+            input.setError(messageStart + 'una letra mayúscula')
+        } else if (!REGEX_ONE_NUMBER.test(input.value)) {
+            input.setError(messageStart + 'un numero')
+        } else if (!REGEX_ONE_SPECIAL.test(input.value)) {
+            input.setError(messageStart + 'un caracter especial')
         } else {
-
-            isOk = true
-
+            return true
         }
 
-        return isOk
+        updateForm()
+
+        return false
     }
 
     const isRepeatPasswordOk = () => {
 
-        let isOk = false
-        const input = 'repeatPassword'
-        const value = form[input].value
+        const input = form.repeatPassword
 
-        if (value === '') {
-
-            updateForm(input, 'El campo no puede estar vacio')
-
-        } else if (value !== form.password.value) {
-
-            updateForm(input, 'Las contraseñas deben coincidir')
-
+        if (input.value === '') {
+            input.setError('El campo no puede estar vacio')
+        } else if (input.value !== form.password.value) {
+            input.setError('Las contraseñas deben coincidir')
         } else {
-
-            isOk = true
-
+            return true
         }
 
-        return isOk
+        updateForm()
+
+        return false
     }
 
     const validateForm = () => {
@@ -119,6 +87,12 @@ const RegisterScreen = () => {
                 auth(false, form.email.value, form.password.value)
             )
         }
+    }
+
+    const handleChangeText = (input: string, value: string) => {
+        form[input].setValue(value)
+        form[input].setError('')
+        updateForm()
     }
 
     return (
@@ -131,7 +105,7 @@ const RegisterScreen = () => {
                     keyboardType='email-address'
                     value={form.email.value}
                     secureTextEntry={false}
-                    onChangeText={(value: string) => setForm({ ...form, ['email']: new Input(value, '') })}
+                    onChangeText={(value: string) => handleChangeText('email', value)}
                     onEndEditing={isEmailOk}
                 />
                 <CustomInput
@@ -140,7 +114,7 @@ const RegisterScreen = () => {
                     keyboardType='ascii-capable'
                     value={form.password.value}
                     secureTextEntry={true}
-                    onChangeText={(value: string) => setForm({ ...form, ['password']: new Input(value, '') })}
+                    onChangeText={(value: string) => handleChangeText('password', value)}
                     onEndEditing={isPasswordOk}
                 />
                 <CustomInput
@@ -149,7 +123,7 @@ const RegisterScreen = () => {
                     keyboardType='ascii-capable'
                     value={form.repeatPassword.value}
                     secureTextEntry={true}
-                    onChangeText={(value: string) => setForm({ ...form, ['repeatPassword']: new Input(value, '') })}
+                    onChangeText={(value: string) => handleChangeText('repeatPassword', value)}
                     onEndEditing={isRepeatPasswordOk}
                 />
                 <View style={styles.buttonContainer}>

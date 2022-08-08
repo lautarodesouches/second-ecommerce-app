@@ -18,4 +18,9 @@ export class CartItem {
         this.subtotal = quantity * price + quantity * shipping
     }
 
+    addMore(quantity: number, shipping: number) {
+        this.quantity += quantity
+        this.shipping += shipping
+    }
+
 }
