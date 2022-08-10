@@ -1,11 +1,11 @@
 import { Text, View } from 'react-native'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { styles } from './styles'
 import { ButtonPrimary, CustomInput } from '../../components'
 import { REGEX_EMAIL, REGEX_EIGHT_CHARACTERS, REGEX_ONE_UPPERCASE, REGEX_ONE_LOWERCASE, REGEX_ONE_NUMBER, REGEX_ONE_SPECIAL } from '../../validations'
 import { Input } from '../../models/Input'
 import { useDispatch, useSelector } from 'react-redux'
-import { auth } from '../../store/auth.slice'
+import { auth, deleteMessage } from '../../store/auth.slice'
 
 const RegisterScreen = () => {
 
@@ -19,14 +19,15 @@ const RegisterScreen = () => {
         repeatPassword: new Input
     })
 
-    let message = 'Ha ocurrido un error'
+    // Translate firebase auth message
+    let errorMessage = 'Ha ocurrido un error'
     if (authState.message) {
         switch (authState.message) {
             case 'EMAIL_EXISTS':
-                message = 'El email ya está registrado'
+                errorMessage = 'El email ya está registrado'
                 break
             default:
-                console.log(authState.message)
+                console.log('Register error message', authState.message)
                 break
         }
     }
@@ -36,61 +37,61 @@ const RegisterScreen = () => {
     const isEmailOk = () => {
 
         const input = form.email
+        let error = ''
 
-        if (input.value === '') {
-            input.setError('El campo no puede estar vacio')
-        } else if (!REGEX_EMAIL.test(input.value)) {
-            input.setError('Email invalido')
-        } else {
-            return true
+        if (input.isValueEmpty()) {
+            error = 'El campo no puede estar vacio'
+        } else if (!input.testValue(REGEX_EMAIL)) {
+            error = 'Email invalido'
         }
 
+        input.setError(error)
         updateForm()
 
-        return false
+        return !error
     }
 
     const isPasswordOk = () => {
 
         const input = form.password
+        let error = ''
         const messageStart = 'La contraseña debe tener al menos '
 
-        if (input.value === '') {
-            input.setError('El campo no puede estar vacio')
-        } else if (!REGEX_EIGHT_CHARACTERS.test(input.value)) {
-            input.setError(messageStart + '8 caracteres')
-        } else if (!REGEX_ONE_LOWERCASE.test(input.value)) {
-            input.setError(messageStart + 'una letra minúscula')
-        } else if (!REGEX_ONE_UPPERCASE.test(input.value)) {
-            input.setError(messageStart + 'una letra mayúscula')
-        } else if (!REGEX_ONE_NUMBER.test(input.value)) {
-            input.setError(messageStart + 'un numero')
-        } else if (!REGEX_ONE_SPECIAL.test(input.value)) {
-            input.setError(messageStart + 'un caracter especial')
-        } else {
-            return true
+        if (input.isValueEmpty()) {
+            error = 'El campo no puede estar vacio'
+        } else if (!input.testValue(REGEX_EIGHT_CHARACTERS)) {
+            error = messageStart + '8 caracteres'
+        } else if (!input.testValue(REGEX_ONE_LOWERCASE)) {
+            error = messageStart + 'una letra minúscula'
+        } else if (!input.testValue(REGEX_ONE_UPPERCASE)) {
+            error = messageStart + 'una letra mayúscula'
+        } else if (!input.testValue(REGEX_ONE_NUMBER)) {
+            error = messageStart + 'un numero'
+        } else if (!input.testValue(REGEX_ONE_SPECIAL)) {
+            error = messageStart + 'un caracter especial'
         }
 
+        input.setError(error)
         updateForm()
 
-        return false
+        return !error
     }
 
     const isRepeatPasswordOk = () => {
 
         const input = form.repeatPassword
+        let error = ''
 
-        if (input.value === '') {
-            input.setError('El campo no puede estar vacio')
+        if (input.isValueEmpty()) {
+            error = 'El campo no puede estar vacio'
         } else if (input.value !== form.password.value) {
-            input.setError('Las contraseñas deben coincidir')
-        } else {
-            return true
+            error = 'Las contraseñas deben coincidir'
         }
 
+        input.setError(error)
         updateForm()
 
-        return false
+        return !error
     }
 
     const validateForm = () => {
@@ -106,6 +107,12 @@ const RegisterScreen = () => {
         form[input].setError('')
         updateForm()
     }
+
+    useEffect(() => {
+        dispatch(
+            deleteMessage()
+        )
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -142,7 +149,7 @@ const RegisterScreen = () => {
                     <ButtonPrimary onPress={validateForm} title='Registrarme' />
                 </View>
                 {
-                    !!authState.message && <Text style={styles.authMessage}>{message}</Text>
+                    !!authState.message && <Text style={styles.authMessage}>{errorMessage}</Text>
                 }
             </View>
         </View>

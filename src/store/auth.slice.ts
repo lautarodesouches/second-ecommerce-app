@@ -22,6 +22,9 @@ const authSlice = createSlice({
             if (action.payload.userId) state.userId = action.payload.userId
             if (action.payload.message) state.message = action.payload.message
         },
+        deleteMessage: (state) => {
+            state.message = null
+        },
         logout: (state) => {
             state.name = null
             state.address = null
@@ -65,6 +68,6 @@ export const auth = (isLogIn: boolean, email: string, password: string) => (
     }
 )
 
-export const { updateAuth, logout } = authSlice.actions
+export const { updateAuth, deleteMessage, logout } = authSlice.actions
 
 export default authSlice.reducer
