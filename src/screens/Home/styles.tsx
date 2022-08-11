@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     },
     loadingText: {
         textAlign: 'center',
-        fontSize: 24
+        fontSize: 24,
+        fontFamily: 'RobotoRegular'
     }
 })

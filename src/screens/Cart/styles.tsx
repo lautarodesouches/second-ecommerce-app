@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     },
     emptyText: {
         fontSize: 20,
+        fontFamily: 'RobotoRegular',
         textAlign: 'center'
     }
 })

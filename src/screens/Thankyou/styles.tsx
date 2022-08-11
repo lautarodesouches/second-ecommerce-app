@@ -15,12 +15,14 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
+        fontFamily: 'MerriweatherRegular',
         textAlign: 'center',
         color: themeText
     },
     subTitle: {
         marginVertical: 10,
         fontSize: 20,
+        fontFamily: 'RobotoRegular',
         textAlign: 'center',
         color: themeText
     },
@@ -31,6 +33,7 @@ export const styles = StyleSheet.create({
         marginTop: 30,
         fontSize: 20,
         textAlign: 'center',
-        marginBottom: 20
+        marginBottom: 20,
+        fontFamily: 'RobotoRegular',
     },
 })

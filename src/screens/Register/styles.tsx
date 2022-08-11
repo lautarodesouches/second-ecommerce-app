@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
     },
     touchableText: {
         textAlign: 'center',
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'MerriweatherRegular'
     }
 })

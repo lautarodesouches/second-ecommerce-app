@@ -6,11 +6,13 @@ export const styles = StyleSheet.create({
     },
     label: {
         fontSize: 18,
+        fontFamily: 'RobotoRegular',
         marginBottom: 10
     },
     input: {
         backgroundColor: '#fff',
         fontSize: 16,
+        fontFamily: 'RobotoRegular',
         borderRadius: 5,
         borderWidth: 1,
         paddingHorizontal: 10,
@@ -18,6 +20,7 @@ export const styles = StyleSheet.create({
     },
     help: {
         fontSize: 16,
+        fontFamily: 'RobotoRegular',
         marginTop: 10,
         color: 'crimson'
     }

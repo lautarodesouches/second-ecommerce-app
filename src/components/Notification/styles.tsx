@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         color: secondaryText,
-        fontSize: 17
+        fontSize: 17,
+        fontFamily: 'RobotoRegular'
     }
 })

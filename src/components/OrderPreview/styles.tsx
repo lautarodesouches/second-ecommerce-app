@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
     date: {
         flex: 1,
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'RobotoRegular'
     },
     row: {
         marginTop: 20,
@@ -39,14 +40,7 @@ export const styles = StyleSheet.create({
     },
     state: {
         textAlign: 'center',
-        fontSize: 18
-    },
-    button: {
-
-    },
-    buttonText: {
-        color: 'blue',
-        textAlign: 'center',
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: 'RobotoRegular'
     }
 })

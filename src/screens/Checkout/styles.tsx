@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
     },
     state: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 20,
+        fontFamily: 'RobotoRegular'
     }
 })
