@@ -25,5 +25,16 @@ export const styles = StyleSheet.create({
         marginTop: 20,
         fontSize: 18,
         textAlign: 'center'
+    },
+    hint: {
+        fontSize: 15,
+        marginTop: 20
+    },
+    touchable: {
+        marginTop: 20
+    },
+    touchableText: {
+        textAlign: 'center',
+        fontSize: 16
     }
 })

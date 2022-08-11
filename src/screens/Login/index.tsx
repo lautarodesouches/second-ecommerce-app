@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import { styles } from './styles'
 import { ButtonPrimary, CustomInput } from '../../components'
@@ -7,7 +7,7 @@ import { Input } from '../../models/Input'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth, deleteMessage } from '../../store/auth.slice'
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }: { navigation: any }) => {
 
     const dispatch: any = useDispatch()
 
@@ -128,6 +128,9 @@ const LoginScreen = () => {
                 {
                     !!authState.message && <Text style={styles.authMessage}>{errorMessage}</Text>
                 }
+                <TouchableOpacity style={styles.touchable} onPress={() => navigation.navigate('Register')}>
+                    <Text style={styles.touchableText}>No tenés cuenta? Crear cuenta</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )

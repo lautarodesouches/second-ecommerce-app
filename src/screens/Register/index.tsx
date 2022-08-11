@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import { styles } from './styles'
 import { ButtonPrimary, CustomInput } from '../../components'
@@ -7,7 +7,7 @@ import { Input } from '../../models/Input'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth, deleteMessage } from '../../store/auth.slice'
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }: { navigation: any }) => {
 
     const dispatch: any = useDispatch()
 
@@ -151,6 +151,10 @@ const RegisterScreen = () => {
                 {
                     !!authState.message && <Text style={styles.authMessage}>{errorMessage}</Text>
                 }
+                <Text style={styles.hint}>*La contraseña debe tener al menos 8 caracters, una letra mayúscula, una minúscula y un caracter especial.</Text>
+                <TouchableOpacity style={styles.touchable} onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.touchableText}>Tenés cuenta? Iniciar sesión</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
