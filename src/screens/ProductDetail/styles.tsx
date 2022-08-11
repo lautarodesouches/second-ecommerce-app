@@ -3,7 +3,9 @@ import { themeBg, grey, primaryBg } from '../../constants/Colors/index';
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        alignItems:'center', 
+        justifyContent: 'center'
     },
     scroll: {
         flex: 1,
@@ -93,5 +95,9 @@ export const styles = StyleSheet.create({
         marginTop: 20,
         width: '80%',
         alignSelf: 'center'
+    },
+    loading: {
+        textAlign: 'center',
+        fontSize: 24
     }
 })

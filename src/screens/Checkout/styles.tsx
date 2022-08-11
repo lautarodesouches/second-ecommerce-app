@@ -5,8 +5,7 @@ export const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         paddingHorizontal: '5%',
-        backgroundColor: themeBg,
-        justifyContent: 'space-between'
+        backgroundColor: themeBg
     },
     form: {
         flex: 0.9,
@@ -27,5 +26,9 @@ export const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 0.1
+    },
+    state: {
+        textAlign: 'center',
+        fontSize: 20
     }
 })

@@ -5,9 +5,9 @@ import { styles } from './styles'
 
 const ProductPreview = ({ item, navigation }: { item: any, navigation: any }) => {
 
-    const handleProductSelect = () => navigation.navigate('Detail', { item })
-
     const { id, name, price, discount, freeShipping } = item
+
+    const handleProductSelect = () => navigation.navigate('Detail', { itemId: id })
 
     const shippingCost = freeShipping ? 0 : 500
 

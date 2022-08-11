@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Text } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { ButtonPrimary, CustomInput } from '../../components'
 import { Input } from '../../models/Input'
@@ -16,6 +16,8 @@ const CheckoutScreen = ({ navigation }: { navigation: any }) => {
 
     const cart = useSelector((state: any) => state.cart.cart)
     const user = useSelector((state: any) => state.auth)
+
+    const [state, setState] = useState('')
 
     const [form, setForm] = useState<any>({
         name: new Input(user.name),
@@ -66,6 +68,8 @@ const CheckoutScreen = ({ navigation }: { navigation: any }) => {
 
     const createOrder = () => {
 
+        setState('Procesando pedido.')
+
         // Set order
         let order = {
             buyer: {
@@ -105,87 +109,96 @@ const CheckoutScreen = ({ navigation }: { navigation: any }) => {
             return newOrderRef
         })()
             .then(result => {
+                setState('')
                 dispatch(clearCart())
                 navigation.navigate('Thankyou', { orderId: result.id })
             })
             .catch(error => {
-                console.log(error)
+                setState('Ha ocurrido un error :/')
             })
 
     }
 
     return (
 
-        <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.formGroup}>
-                <CustomInput
-                    label='Nombre'
-                    helpMessage={form.name.getError()}
-                    onChangeText={(value: string) => handleChangeText('name', value)}
-                    value={form.name.getValue()}
-                    keyboardType='default'
-                    secureTextEntry={false}
-                    onEndEditing={() => validateNotEmpty('name')}
-                />
-            </View>
-            <View style={styles.formGroup}>
-                <CustomInput
-                    label='Teléfono'
-                    helpMessage={form.phone.getError()}
-                    onChangeText={(value: string) => handleChangeText('phone', value)}
-                    value={form.phone.getValue()}
-                    keyboardType='default'
-                    secureTextEntry={false}
-                    onEndEditing={() => validateNotEmpty('phone')}
-                />
-            </View>
-            <View style={styles.formGroup}>
-                <CustomInput
-                    label='Dirección'
-                    helpMessage={form.address.getError()}
-                    onChangeText={(value: string) => handleChangeText('address', value)}
-                    value={form.address.getValue()}
-                    keyboardType='default'
-                    secureTextEntry={false}
-                    onEndEditing={() => validateNotEmpty('address')}
-                />
-            </View>
-            <View style={styles.formGroup}>
-                <CustomInput
-                    label='Tarjeta'
-                    helpMessage={form.cc.getError()}
-                    onChangeText={(value: string) => handleChangeText('cc', value)}
-                    value={form.cc.getValue()}
-                    keyboardType='number-pad'
-                    secureTextEntry={false}
-                    onEndEditing={() => validateNotEmpty('cc')}
-                />
-                <View style={styles.row}>
-                    <View style={[styles.col, { marginRight: 10 }]}>
-                        <CustomInput
-                            label='Vencimiento'
-                            helpMessage={form.exp.getError()}
-                            onChangeText={(value: string) => handleChangeText('exp', value)}
-                            value={form.exp.getValue()}
-                            keyboardType='number-pad'
-                            secureTextEntry={false}
-                            onEndEditing={() => validateNotEmpty('exp')}
-                        />
-                    </View>
-                    <View style={[styles.col, { marginLeft: 10 }]}>
-                        <CustomInput
-                            label='Codigo'
-                            helpMessage={form.sCode.getError()}
-                            onChangeText={(value: string) => handleChangeText('sCode', value)}
-                            value={form.sCode.getValue()}
-                            keyboardType='number-pad'
-                            secureTextEntry={true}
-                            onEndEditing={() => validateNotEmpty('sCode')}
-                        />
-                    </View>
-                </View>
-            </View>
-            <ButtonPrimary onPress={validateForm} title='Siguiente' />
+        <ScrollView contentContainerStyle={[styles.container, {justifyContent: state ? 'center' : 'space-between'}]}>
+            {
+                state
+                    ?
+                    <Text style={styles.state}>{state}</Text>
+                    :
+                    <>
+                        <View style={styles.formGroup}>
+                            <CustomInput
+                                label='Nombre'
+                                helpMessage={form.name.getError()}
+                                onChangeText={(value: string) => handleChangeText('name', value)}
+                                value={form.name.getValue()}
+                                keyboardType='default'
+                                secureTextEntry={false}
+                                onEndEditing={() => validateNotEmpty('name')}
+                            />
+                        </View>
+                        <View style={styles.formGroup}>
+                            <CustomInput
+                                label='Teléfono'
+                                helpMessage={form.phone.getError()}
+                                onChangeText={(value: string) => handleChangeText('phone', value)}
+                                value={form.phone.getValue()}
+                                keyboardType='default'
+                                secureTextEntry={false}
+                                onEndEditing={() => validateNotEmpty('phone')}
+                            />
+                        </View>
+                        <View style={styles.formGroup}>
+                            <CustomInput
+                                label='Dirección'
+                                helpMessage={form.address.getError()}
+                                onChangeText={(value: string) => handleChangeText('address', value)}
+                                value={form.address.getValue()}
+                                keyboardType='default'
+                                secureTextEntry={false}
+                                onEndEditing={() => validateNotEmpty('address')}
+                            />
+                        </View>
+                        <View style={styles.formGroup}>
+                            <CustomInput
+                                label='Tarjeta'
+                                helpMessage={form.cc.getError()}
+                                onChangeText={(value: string) => handleChangeText('cc', value)}
+                                value={form.cc.getValue()}
+                                keyboardType='number-pad'
+                                secureTextEntry={false}
+                                onEndEditing={() => validateNotEmpty('cc')}
+                            />
+                            <View style={styles.row}>
+                                <View style={[styles.col, { marginRight: 10 }]}>
+                                    <CustomInput
+                                        label='Vencimiento'
+                                        helpMessage={form.exp.getError()}
+                                        onChangeText={(value: string) => handleChangeText('exp', value)}
+                                        value={form.exp.getValue()}
+                                        keyboardType='number-pad'
+                                        secureTextEntry={false}
+                                        onEndEditing={() => validateNotEmpty('exp')}
+                                    />
+                                </View>
+                                <View style={[styles.col, { marginLeft: 10 }]}>
+                                    <CustomInput
+                                        label='Codigo'
+                                        helpMessage={form.sCode.getError()}
+                                        onChangeText={(value: string) => handleChangeText('sCode', value)}
+                                        value={form.sCode.getValue()}
+                                        keyboardType='number-pad'
+                                        secureTextEntry={true}
+                                        onEndEditing={() => validateNotEmpty('sCode')}
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                        <ButtonPrimary onPress={validateForm} title='Siguiente' />
+                    </>
+            }
         </ScrollView>
 
     )
