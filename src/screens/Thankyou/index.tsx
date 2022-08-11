@@ -20,7 +20,7 @@ const ThankyouScreen = ({ navigation, route }: { navigation: any, route: any }) 
             <View style={styles.info}>
                 <Text style={styles.title}>Gracias por tu compra!</Text>
                 <Text style={styles.subTitle}>Tu ID de compra es {orderId}</Text>
-                <ButtonSecondary title='Ver compra' onPress={() => navigation.navigate('Orders')} />
+                <ButtonSecondary title='Ver compras' onPress={() => navigation.navigate('Orders')} />
             </View>
             <Text style={styles.recommendedTitle}>Te puede interesar:</Text>
         </>
