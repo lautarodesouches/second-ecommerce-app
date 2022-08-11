@@ -39,7 +39,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
 
         dispatch(
             addToCart(
-                new CartItem(id, name, selectedColor, quantity, getPrice, shippingCost)
+                new CartItem(id, name, selectedColor, quantity, getPrice, shippingCost, brand)
             )
         )
 

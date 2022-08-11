@@ -6,10 +6,10 @@ export const styles = StyleSheet.create({
         flexGrow: 1,
         padding: '2.5%',
         backgroundColor: themeBg,
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
     info: {
-        flex: 0.4,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -25,9 +25,10 @@ export const styles = StyleSheet.create({
         color: themeText
     },
     recommendedContainer: {
-        flex: 0.6
+        flex: 1
     },
     recommendedTitle: {
+        marginTop: 30,
         fontSize: 20,
         textAlign: 'center',
         marginBottom: 20

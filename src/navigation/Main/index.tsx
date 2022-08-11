@@ -8,6 +8,7 @@ const MainNavigator = () => {
     const Stack = createNativeStackNavigator()
 
     const userId = useSelector((state: any) => state.auth.userId)
+    const cart = useSelector((state: any) => state.cart.cart)
 
     return (
         <Stack.Navigator
@@ -39,11 +40,11 @@ const MainNavigator = () => {
                 />
                 <Stack.Screen
                     name='Login'
-                    component={userId ? UserScreen : LoginScreen}
+                    component={userId ? (cart.length > 0 ? CheckoutScreen : UserScreen) : LoginScreen}
                 />
                 <Stack.Screen
                     name='Register'
-                    component={userId ? UserScreen : RegisterScreen}
+                    component={userId ? (cart.length > 0 ? CheckoutScreen : UserScreen) : RegisterScreen}
                 />
             </Stack.Group>
             <Stack.Group>

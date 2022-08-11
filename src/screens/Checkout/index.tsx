@@ -1,20 +1,32 @@
 import { useState } from 'react';
 import { View, ScrollView } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
 import { ButtonPrimary, CustomInput } from '../../components'
 import { Input } from '../../models/Input'
+import { updateAuth } from '../../store/auth.slice'
 import { styles } from './styles'
+import { CartItem } from '../../models/CartItem'
+import { collection, doc, getDocs, increment, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore'
+import db from '../../utils/firebaseConfig'
+import { clearCart } from '../../store/cart.slice'
 
 const CheckoutScreen = ({ navigation }: { navigation: any }) => {
 
+    const dispatch = useDispatch()
+
+    const cart = useSelector((state: any) => state.cart.cart)
+    const user = useSelector((state: any) => state.auth)
+
     const [form, setForm] = useState<any>({
-        name: new Input,
-        address: new Input,
+        name: new Input(user.name),
+        phone: new Input(user.phone),
+        address: new Input(user.address),
         cc: new Input,
         exp: new Input,
         sCode: new Input
     })
 
-    const updateForm = () => setForm({...form})
+    const updateForm = () => setForm({ ...form })
 
     const handleChangeText = (inputName: string, value: string) => {
         form[inputName].setValue(value)
@@ -34,9 +46,72 @@ const CheckoutScreen = ({ navigation }: { navigation: any }) => {
     const validateForm = () => {
         let valid = true
         for (const input in form) {
-            if(!validateNotEmpty(input)) valid = false
+            if (!validateNotEmpty(input)) valid = false
         }
-        if(valid) navigation.navigate('Thankyou')
+        if (valid) {
+
+            dispatch(
+                updateAuth({
+                    name: form.name.getValue(),
+                    phone: form.phone.getValue(),
+                    address: form.address.getValue(),
+                    creditCard: form.cc.getValue()
+                })
+            )
+
+            createOrder()
+
+        }
+    }
+
+    const createOrder = () => {
+
+        // Set order
+        let order = {
+            buyer: {
+                name: form.name.getValue(),
+                email: user.email,
+                phone: form.phone.getValue()
+            },
+            total: cart.reduce((acc: number, item: CartItem) => acc + item.subtotal, 0),
+            items: cart.map(
+                (item: CartItem) => ({
+                    id: item.id,
+                    name: item.name,
+                    brand: item.brand,
+                    price: item.price,
+                    qty: item.quantity,
+                    color: item.color,
+                })
+            ),
+            date: serverTimestamp()
+        }
+
+        // Update stock
+        cart.forEach(async (item: CartItem) => {
+            // Get item doc by id
+            let docId: string = ''
+            const querySnapshot = query(collection(db, "products"), where("id", "==", item.id))
+            await getDocs(querySnapshot).then(res => docId = res.docs[0].id)
+            // Update
+            const itemRef = doc(db, "products", docId)
+            await updateDoc(itemRef, { amountAvailable: increment(- item.quantity) })
+        });
+
+        // Create new order in firebase
+        (async () => {
+            const newOrderRef = doc(collection(db, "orders"))
+            await setDoc(newOrderRef, order)
+            return newOrderRef
+        })()
+            .then(result => {
+                dispatch(clearCart())
+                navigation.navigate('Thankyou', { orderId: result.id })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
     }
 
     return (
@@ -51,6 +126,17 @@ const CheckoutScreen = ({ navigation }: { navigation: any }) => {
                     keyboardType='default'
                     secureTextEntry={false}
                     onEndEditing={() => validateNotEmpty('name')}
+                />
+            </View>
+            <View style={styles.formGroup}>
+                <CustomInput
+                    label='Teléfono'
+                    helpMessage={form.phone.getError()}
+                    onChangeText={(value: string) => handleChangeText('phone', value)}
+                    value={form.phone.getValue()}
+                    keyboardType='default'
+                    secureTextEntry={false}
+                    onEndEditing={() => validateNotEmpty('phone')}
                 />
             </View>
             <View style={styles.formGroup}>

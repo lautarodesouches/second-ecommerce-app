@@ -5,6 +5,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         name: null,
+        phone: null,
         email: null,
         address: null,
         creditCard: null,
@@ -15,6 +16,7 @@ const authSlice = createSlice({
     reducers: {
         updateAuth: (state, action) => {
             if (action.payload.name) state.name = action.payload.name
+            if (action.payload.phone) state.phone = action.payload.phone
             if (action.payload.email) state.email = action.payload.email
             if (action.payload.address) state.address = action.payload.address
             if (action.payload.creditCard) state.creditCard = action.payload.creditCard
@@ -27,6 +29,7 @@ const authSlice = createSlice({
         },
         logout: (state) => {
             state.name = null
+            state.phone = null
             state.address = null
             state.creditCard = null
             state.token = null

@@ -7,8 +7,9 @@ export class CartItem {
     price: number
     shipping: number
     subtotal: number
+    brand: string
 
-    constructor(id: number, name: string, color: string, quantity: number, price: number, shipping: number) {
+    constructor(id: number, name: string, color: string, quantity: number, price: number, shipping: number, brand: string) {
         this.id = id
         this.name = name
         this.color = color
@@ -16,6 +17,7 @@ export class CartItem {
         this.price = price
         this.shipping = shipping
         this.subtotal = quantity * price + quantity * shipping
+        this.brand = brand
     }
 
     public addMore(quantity: number, shipping: number): void {

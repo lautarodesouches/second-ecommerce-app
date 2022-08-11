@@ -4,31 +4,36 @@ import { products } from '../../utils/products'
 import { styles } from './styles'
 import ButtonSecondary from '../../components/Buttons/Secondary/index'
 
-const ThankyouScreen = ({ navigation }: { navigation: any }) => {
+const ThankyouScreen = ({ navigation, route }: { navigation: any, route: any }) => {
+
+    const { orderId } = route.params
 
     const recommended = [
-        products[1],
-        products[11],
+        products[Math.floor(Math.random() * 19)],
+        products[Math.floor(Math.random() * 19)],
     ]
 
     const RenderItem = ({ item }: { item: any }) => <ProductPreview item={item} navigation={navigation} />
 
-    return (
-        <View style={styles.container}>
+    const ListHeaderComponent = () => (
+        <>
             <View style={styles.info}>
                 <Text style={styles.title}>Gracias por tu compra!</Text>
-                <Text style={styles.subTitle}>Tu ID de compra es 543543534</Text>
+                <Text style={styles.subTitle}>Tu ID de compra es {orderId}</Text>
                 <ButtonSecondary title='Ver compra' onPress={() => navigation.navigate('Orders')} />
             </View>
-            <View style={styles.recommendedContainer}>
-                <Text style={styles.recommendedTitle}>Te puede interesar:</Text>
-                <FlatList
-                    data={recommended}
-                    renderItem={RenderItem}
-                    numColumns={2}
-                />
-            </View>
-        </View>
+            <Text style={styles.recommendedTitle}>Te puede interesar:</Text>
+        </>
+    )
+
+    return (
+        <FlatList
+            contentContainerStyle={styles.container}
+            ListHeaderComponent={ListHeaderComponent}
+            data={recommended}
+            renderItem={RenderItem}
+            numColumns={2}
+        />
     )
 }
 
