@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
-import { themeBg, grey, primaryBg } from '../../constants/Colors/index';
+import { themeBg, grey, primaryBg } from '../../constants/Colors/index'
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems:'center', 
+        alignItems: 'center',
         justifyContent: 'center'
     },
     scroll: {

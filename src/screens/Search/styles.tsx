@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
     flatList: {
         margin: 10
     },
-    loadingText: {
+    emptyText: {
         textAlign: 'center',
-        fontSize: 24,
+        fontSize: 20,
         fontFamily: 'RobotoRegular'
     }
 })

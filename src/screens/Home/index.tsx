@@ -1,24 +1,25 @@
-import { FlatList, Text, View } from 'react-native'
-import { ProductPreview } from '../../components'
+import { FlatList, View } from 'react-native'
+import { Loading, ProductPreview } from '../../components'
 import { styles } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
 import db from '../../utils/firebaseConfig'
 import { collection, getDocs, limit, orderBy, query, startAt } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { addProducts, setProducts } from '../../store/product.slice'
+import { addProducts } from '../../store/product.slice'
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
 
     const LIST_LIMIT = 10
 
     const [lastDocument, setLastDocument] = useState(1)
-    const [emptyMessage, setEmptyMessage] = useState('Cargando...')
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState('')
 
     const products = useSelector((state: any) => state.product.products)
 
     const dispatch = useDispatch()
 
-    const loadProducts = (firtsLoad: boolean) => {
+    const loadProducts = () => {
 
         // Limit queries to firebase
         if (lastDocument > 21) return
@@ -29,45 +30,36 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
         })()
             .then((result) => {
 
-                if (result.docs.length < 1) setEmptyMessage('Hubo un error en la carga de los productos')
-
                 dispatch(
-                    firtsLoad
-                        ?
-                        setProducts(
-                            result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-                        )
-                        :
-                        addProducts(
-                            result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-                        )
+                    addProducts(
+                        result.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+                    )
                 )
-
+                setLastDocument(lastDocument + LIST_LIMIT)
             })
-            .catch(error => console.log(error))
-            .finally(() => setLastDocument(lastDocument + LIST_LIMIT))
+            .catch(error => setError(error.message))
+            .finally(() => setLoading(false))
     }
 
     useEffect(() => {
-        loadProducts(true)
-    }, [])
-
-    const ListEmptyComponent = () => <Text style={styles.loadingText}>{emptyMessage}</Text>
+        loadProducts()
+    }, [error])
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={products}
-                renderItem={({ item }) => <ProductPreview item={item} navigation={navigation} />}
-                numColumns={2}
-                style={styles.flatList}
-                contentContainerStyle={styles.contentContainer}
-                ListEmptyComponent={ListEmptyComponent}
-                onEndReached={() => loadProducts(false)}
-                onEndReachedThreshold={1.5}
-                keyExtractor={(item) => item.id}
-            />
-        </View>
+        <Loading loading={loading} error={error} setError={setError} navigate={navigation.navigate} currentScreen='Home'>
+            <View style={styles.container}>
+                <FlatList
+                    data={products}
+                    renderItem={({ item }) => <ProductPreview item={item} navigation={navigation} />}
+                    numColumns={2}
+                    style={styles.flatList}
+                    contentContainerStyle={styles.contentContainer}
+                    onEndReached={loadProducts}
+                    onEndReachedThreshold={1.5}
+                    keyExtractor={(item) => item.id}
+                />
+            </View>
+        </Loading>
     )
 }
 

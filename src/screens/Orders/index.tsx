@@ -1,5 +1,5 @@
 import { FlatList, Text, View } from 'react-native'
-import { ButtonPrimary, OrderPreview } from '../../components'
+import { ButtonPrimary, Loading, OrderPreview } from '../../components'
 import { styles } from './styles';
 import { useEffect, useState } from 'react'
 import { collection, getDocs, query, where } from 'firebase/firestore'
@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux'
 
 const OrdersScreen = ({ navigation }: { navigation: any }) => {
 
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState('')
     const [orders, setOrders] = useState<any[]>([])
 
     const email = useSelector((state: any) => state.auth.email)
@@ -25,17 +27,22 @@ const OrdersScreen = ({ navigation }: { navigation: any }) => {
                 result.push({ id: doc.id, ...doc.data() })
             })
 
-            setOrders(
-                result.sort(
-                    (a, b) => {
-                        if (a.date.seconds < b.date.seconds) return 1
-                        if (a.date.seconds > b.date.seconds) return -1
-                        return 0
-                    }
-                )
-            )
+            return result
 
         })()
+            .then(result => {
+                setOrders(
+                    result.sort(
+                        (a, b) => {
+                            if (a.date.seconds < b.date.seconds) return 1
+                            if (a.date.seconds > b.date.seconds) return -1
+                            return 0
+                        }
+                    )
+                )
+            })
+            .catch(error => setError(error.message))
+            .finally(() => setLoading(false))
 
     }, [])
 
@@ -49,12 +56,14 @@ const OrdersScreen = ({ navigation }: { navigation: any }) => {
     )
 
     return (
-        <FlatList
-            contentContainerStyle={styles.container}
-            data={orders}
-            renderItem={({ item }: { item: any }) => <OrderPreview order={item} />}
-            ListEmptyComponent={ListEmptyComponent}
-        />
+        <Loading loading={loading} error={error} setError={setError} navigate={navigation.navigate} currentScreen='Orders'>
+            <FlatList
+                contentContainerStyle={styles.container}
+                data={orders}
+                renderItem={({ item }: { item: any }) => <OrderPreview order={item} />}
+                ListEmptyComponent={ListEmptyComponent}
+            />
+        </Loading>
     )
 }
 

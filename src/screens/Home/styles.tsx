@@ -13,9 +13,9 @@ export const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center'
     },
-    loadingText: {
+    emptyText: {
         textAlign: 'center',
-        fontSize: 24,
+        fontSize: 16,
         fontFamily: 'RobotoRegular'
     }
 })

@@ -8,7 +8,7 @@ const UserScreen = ({ navigation }: { navigation: any }) => {
 
     const dispatch = useDispatch()
 
-    const { name, email } = useSelector((state: any) => state.auth)    
+    const { name, email } = useSelector((state: any) => state.auth)
 
     return (
         <View style={styles.container}>
