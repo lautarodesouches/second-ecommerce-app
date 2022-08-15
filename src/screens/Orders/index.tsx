@@ -41,7 +41,7 @@ const OrdersScreen = ({ navigation }: { navigation: any }) => {
                     )
                 )
             })
-            .catch(error => setError(error.message))
+            .catch(error => setError('Ha ocurrido un error \n' + error.message))
             .finally(() => setLoading(false))
 
     }, [])

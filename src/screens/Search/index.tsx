@@ -32,7 +32,7 @@ const SearchScreen = ({ navigation }: { navigation: any }) => {
                 setSearchResult(searchResult)
 
             })
-            .catch(error => setError(error.message))
+            .catch(error => setError('Ha ocurrido un error \n' + error.message))
             .finally(() => setLoading(false))
     }, [searchQuery])
 
@@ -48,6 +48,7 @@ const SearchScreen = ({ navigation }: { navigation: any }) => {
                     style={styles.flatList}
                     contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
                     ListEmptyComponent={ListEmptyComponent}
+                    keyExtractor={(item) => item.id}
                 />
             </View>
         </Loading>

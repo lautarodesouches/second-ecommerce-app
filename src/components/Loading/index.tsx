@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import ButtonPrimary from '../Buttons/Primary'
 import { styles } from './styles'
 
-const Loading = ({ children, loading, error, setError, navigate, currentScreen }: { children: ReactChild, loading: boolean, error: string, setError: Function, navigate: Function, currentScreen: string }) => {
+const Loading = ({ children, loading, error, setError, navigate, currentScreen }: { children: ReactChild, loading: boolean, error: string, setError: Function, navigate: Function, currentScreen: string }) => { 
 
     let token = Math.random() * 100
 

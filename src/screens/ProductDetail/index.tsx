@@ -62,6 +62,9 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
     }
 
     useEffect(() => {
+
+        setQuantity(1);
+
         (async function () {
             const querySnapshot = query(collection(db, 'products'), where('id', '==', parseInt(itemId)))
             return await getDocs(querySnapshot)
@@ -72,7 +75,7 @@ const ProductDetailScreen = ({ route, navigation }: { route: any, navigation: an
                 setItem(item)
                 setSelectedColor(item.availableColors[0])
             })
-            .catch(error => setError(error.message))
+            .catch(error => setError('Ha ocurrido un error \n' + error.message))
             .finally(() => setLoading(false))
     }, [itemId, cart])
 

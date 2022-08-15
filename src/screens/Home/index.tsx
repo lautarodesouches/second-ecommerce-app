@@ -37,7 +37,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
                 )
                 setLastDocument(lastDocument + LIST_LIMIT)
             })
-            .catch(error => setError(error.message))
+            .catch(error => setError('Ha ocurrido un error \n' + error.message))
             .finally(() => setLoading(false))
     }
 

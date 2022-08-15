@@ -114,7 +114,7 @@ const CheckoutScreen = ({ navigation }: { navigation: any }) => {
                 dispatch(clearCart())
                 navigation.navigate('Thankyou', { orderId: result.id })
             })
-            .catch(error => setGlobalError(error.message))
+            .catch(error => setGlobalError('Ha ocurrido un error \n' + error.message))
             .finally(() => setLoading(false))
 
     }
