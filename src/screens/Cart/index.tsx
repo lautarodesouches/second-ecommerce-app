@@ -6,6 +6,7 @@ import { styles } from './styles'
 import { clearCart } from '../../store/cart.slice'
 import { useState } from 'react'
 import { CartItem } from '../../models/CartItem'
+import { currencyFormat } from '../../utils/functions'
 
 const CartScreen = ({ navigation }: { navigation: any }) => {
 
@@ -41,7 +42,7 @@ const CartScreen = ({ navigation }: { navigation: any }) => {
         if (!cart.length) return null
         return (
             <>
-                <Text style={styles.total}>Total: ${total}</Text>
+                <Text style={styles.total}>Total: {currencyFormat(total)}</Text>
                 <View style={styles.buttonContainer}>
                     <ButtonPrimary onPress={() => navigation.navigate('Checkout')} title='Checkout' />
                 </View>

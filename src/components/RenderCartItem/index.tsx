@@ -4,7 +4,7 @@ import CloseButton from '../Buttons/Close'
 import CustomAlert from '../CustomAlert'
 import { styles } from './styles'
 import { useState } from 'react'
-import { capitalize } from '../../utils/functions'
+import { capitalize, currencyFormat } from '../../utils/functions'
 import { useDispatch } from 'react-redux'
 import { deleteCartItem } from '../../store/cart.slice'
 
@@ -32,13 +32,13 @@ const RenderCartItem = ({ item }: { item: any }) => {
             <Info placeholder='Nombre' value={name} />
             <View style={{ flexDirection: 'row' }}>
                 <Info placeholder='Color' value={capitalize(color)} />
-                <Info placeholder='Envio' value={'$' + shipping} />
+                <Info placeholder='Envio' value={currencyFormat(shipping)} />
             </View>
             <View style={{ flexDirection: 'row' }}>
                 <Info placeholder='Cantidad' value={quantity} />
-                <Info placeholder='Precio' value={'$' + price} />
+                <Info placeholder='Precio' value={currencyFormat(price)} />
             </View>
-            <Info placeholder='Subtotal' value={'$' + subtotal} />
+            <Info placeholder='Subtotal' value={currencyFormat(subtotal)} />
             {
                 showAlert && (
                     <CustomAlert
